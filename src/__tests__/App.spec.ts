@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import App from '../App.vue'
 
 describe('App.vue', () => {
-  it('renders control panel, square stage container, and placeholder step', async () => {
+  it('renders control panel, square stage container, and home step with direct registration', async () => {
     const wrapper = mount(App, {
       global: {
         plugins: [createPinia()],
@@ -13,7 +13,7 @@ describe('App.vue', () => {
 
     expect(wrapper.find('[data-testid="control-panel"]').exists()).toBe(true)
     expect(wrapper.find('[data-testid="stage-container"]').exists()).toBe(true)
-    expect(wrapper.find('[data-testid="placeholder-step"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="home-step"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('ChristmasBadUI')
 
     // Volume control button starts at 100% and opens the bauble mini-game modal
@@ -29,8 +29,27 @@ describe('App.vue', () => {
     await snowBtn.trigger('click')
     expect(snowBtn.text()).toContain('OFF')
 
-    // Complete placeholder step
-    await wrapper.find('[data-testid="placeholder-complete-btn"]').trigger('click')
-    expect(wrapper.find('[data-testid="placeholder-completed-msg"]').exists()).toBe(true)
+    // Click Register -> navigates to Step 1 placeholder
+    await wrapper.find('[data-testid="home-register-btn"]').trigger('click')
+    expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
+  })
+
+  it('opens login modal telling nobody has an account and redirects to registration', async () => {
+    const wrapper = mount(App, {
+      global: {
+        plugins: [createPinia()],
+      },
+    })
+
+    expect(wrapper.find('[data-testid="login-modal"]').exists()).toBe(false)
+    await wrapper.find('[data-testid="home-login-btn"]').trigger('click')
+
+    const modal = wrapper.find('[data-testid="login-modal"]')
+    expect(modal.exists()).toBe(true)
+    expect(modal.text()).toContain('nikt jeszcze nie ma konta')
+
+    await wrapper.find('[data-testid="login-modal-register-btn"]').trigger('click')
+    expect(wrapper.find('[data-testid="login-modal"]').exists()).toBe(false)
+    expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
   })
 })

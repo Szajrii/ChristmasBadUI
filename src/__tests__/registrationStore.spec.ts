@@ -22,11 +22,13 @@ describe('registrationStore', () => {
   it('marks a step as completed and saves form data', () => {
     const store = useRegistrationStore()
 
-    store.completeStep('welcome-placeholder', { previewAcknowledged: true })
+    store.completeStep('home', { entryChoice: 'register' })
 
     expect(store.isCurrentStepCompleted).toBe(true)
-    expect(store.progressPercent).toBe(100)
-    expect(store.formData.previewAcknowledged).toBe(true)
+    expect(store.progressPercent).toBe(50)
+    expect(store.formData.entryChoice).toBe('register')
+    expect(store.goToNextStep()).toBe(true)
+    expect(store.currentStepIndex).toBe(1)
   })
 
   it('prevents navigating to locked or out-of-range steps', () => {

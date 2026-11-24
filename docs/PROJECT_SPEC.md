@@ -67,7 +67,8 @@
 
 | # | ID | Nazwa kroku | Plik komponentu | Dedykowany skill | Status |
 | :-: | :--- | :--- | :--- | :--- | :--- |
-| 0 | `welcome-placeholder` | Świąteczny Start (Placeholder) | `src/steps/Step00WelcomePlaceholder.vue` | `.agents/skills/step-00-welcome-placeholder/SKILL.md` | Zaimplementowany (Etap 0) |
+| 0 | `home` | Świąteczna Strona Główna | `src/steps/Step00Home.vue` | `.agents/skills/step-00-home/SKILL.md` | Zaimplementowany (Issue #2) |
+| 1 | `step-01-placeholder` | Krok 1: Rejestracja (Pusty placeholder) | `src/steps/Step01RegistrationPlaceholder.vue` | `.agents/skills/step-01-registration-placeholder/SKILL.md` | Tymczasowy (Issue #2) |
 
 ---
 
@@ -77,7 +78,8 @@
 | :--- | :--- | :--- |
 | `christmas-bad-ui` | `.agents/skills/christmas-bad-ui/SKILL.md` | Ogólna architektura, stack (`pnpm`, Vue 3, Vite 8, Tailwind v4, Pinia, Vitest), zasady modularności |
 | `clarify-and-propose` | `.agents/skills/clarify-and-propose/SKILL.md` | Procedura zadawania pytań użytkownikowi i proponowania własnych rozwiązań przy niejasnych zadaniach |
-| `step-00-welcome-placeholder` | `.agents/skills/step-00-welcome-placeholder/SKILL.md` | Opis pierwszego widoku placeholder oraz wzór dla osobnych skilli kolejnych kroków |
+| `step-00-home` | `.agents/skills/step-00-home/SKILL.md` | Strona główna z przyciskami Logowanie (okno dialogowe) i Rejestracja (Issue #2) |
+| `step-01-registration-placeholder` | `.agents/skills/step-01-registration-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 1 rejestracji (cel przejścia ze strony głównej) |
 | `control-volume-bauble-game` | `.agents/skills/control-volume-bauble-game/SKILL.md` | Głośna muzyka „Last Christmas” na starcie oraz 10s mini-gra z 20 bombkami wyciszającymi dźwięk |
 
 ---
@@ -86,6 +88,7 @@
 
 - `src/components/ui/KitschButton.vue` — świąteczny przycisk w wariantach (`santa`, `elf`, `gold`, `grinch`).
 - `src/components/ui/KitschCard.vue` — ramka w stylu laski cukrowej / kiczowatej kartki świątecznej.
+- `src/components/ui/KitschModal.vue` — reużywalne okno dialogowe oparte na `KitschCard`.
 - `src/components/ui/ChristmasLights.vue` — pasek migających lampek choinkowych.
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
@@ -96,6 +99,8 @@
 ---
 
 ## 7. Historia zmian
+
+- **2026-11-24 (Issue #2)**: Przekształcono widok startowy w Stronę Główną (`Step00Home.vue`) z przyciskami **Logowanie** (otwierającym reużywalny `KitschModal.vue` z komunikatem o braku kont i przyciskiem do rejestracji) oraz **Rejestracja** przenoszącym do pustego `Step01RegistrationPlaceholder.vue`; dodano skille `step-00-home` i `step-01-registration-placeholder` oraz testy.
 
 - **2026-11-24 (Issue #1)**: Dodano głośną muzykę „Last Christmas” na wejściu (`FestiveAudioPlayer`), przycisk regulacji głośności w `ControlPanel.vue` oraz 10-sekundową mini-grę `VolumeBaubleGameModal.vue` z 20 bombkami (1–5%) i resetem do 100% przy ponownym otwarciu; dodano skill `control-volume-bauble-game` oraz testy jednostkowe.
 - **2026-11-24 (Etap 0)**: Inicjalizacja projektu (`pnpm`, Vue 3, Vite 8, Tailwind CSS v4, Pinia, Vitest), rozbicie skilli na osobne pliki (`christmas-bad-ui`, `clarify-and-propose`, `step-00-welcome-placeholder`), panel kontrolny, duży kwadratowy kontener z widokiem placeholder, testy jednostkowe oraz workflow GitHub Pages i Gemini CLI.
