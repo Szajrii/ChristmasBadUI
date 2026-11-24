@@ -4,12 +4,14 @@ import { registrationSteps } from '../steps/stepRegistry'
 import { useRegistrationStore } from '../stores/registrationStore'
 import Step00Home from '../steps/Step00Home.vue'
 import Step01Credentials from '../steps/Step01Credentials.vue'
-import Step02Placeholder from '../steps/Step02Placeholder.vue'
+import Step02Email from '../steps/Step02Email.vue'
+import Step03Placeholder from '../steps/Step03Placeholder.vue'
 
 const stepComponents: Record<string, Component> = {
   home: Step00Home,
   'step-01-credentials': Step01Credentials,
-  'step-02-placeholder': Step02Placeholder,
+  'step-02-email': Step02Email,
+  'step-03-placeholder': Step03Placeholder,
 }
 
 export function createAppRouter(history?: RouterHistory) {

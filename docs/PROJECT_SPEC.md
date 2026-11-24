@@ -70,7 +70,8 @@
 | :-: | :--- | :--- | :--- | :--- | :--- |
 | 0 | `home` | Świąteczna Strona Główna | `src/steps/Step00Home.vue` | `.agents/skills/step-00-home/SKILL.md` | Zaimplementowany (Issue #2) |
 | 1 | `step-01-credentials` | Krok 1: Login i Hasło | `src/steps/Step01Credentials.vue` | `.agents/skills/step-01-credentials/SKILL.md` | Zaimplementowany |
-| 2 | `step-02-placeholder` | Krok 2: Wkrótce (Placeholder) | `src/steps/Step02Placeholder.vue` | `.agents/skills/step-02-placeholder/SKILL.md` | Tymczasowy |
+| 2 | `step-02-email` | Krok 2: Świąteczny E-mail | `src/steps/Step02Email.vue` | `.agents/skills/step-02-email/SKILL.md` | Zaimplementowany |
+| 3 | `step-03-placeholder` | Krok 3: Wkrótce (Placeholder) | `src/steps/Step03Placeholder.vue` | `.agents/skills/step-03-placeholder/SKILL.md` | Tymczasowy |
 
 ---
 
@@ -82,7 +83,8 @@
 | `clarify-and-propose` | `.agents/skills/clarify-and-propose/SKILL.md` | Procedura zadawania pytań użytkownikowi i proponowania własnych rozwiązań przy niejasnych zadaniach |
 | `step-00-home` | `.agents/skills/step-00-home/SKILL.md` | Strona główna z przyciskami Logowanie (okno dialogowe) i Rejestracja (Issue #2) |
 | `step-01-credentials` | `.agents/skills/step-01-credentials/SKILL.md` | Krok 1: jednoręki bandyta dla username + hasło wspak z efektem świeczki na kursorze |
-| `step-02-placeholder` | `.agents/skills/step-02-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 2 rejestracji |
+| `step-02-email` | `.agents/skills/step-02-email/SKILL.md` | Krok 2: e-mail z 9 absurdalnymi regułami (50+ znaków, 狗, suma cyfr 14, emotka, renifer, XXIV, brak małego e, TLD) |
+| `step-03-placeholder` | `.agents/skills/step-03-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 3 rejestracji |
 | `control-volume-bauble-game` | `.agents/skills/control-volume-bauble-game/SKILL.md` | Głośna muzyka „Last Christmas” na starcie oraz 10s mini-gra z 20 bombkami wyciszającymi dźwięk |
 
 ---
@@ -97,12 +99,15 @@
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
 - `src/utils/lastChristmasAudio.ts` — statyczny syntezator melodii „Last Christmas” w Web Audio API.
+- `src/utils/emailValidation.ts` — zestaw 9 absurdalnych reguł walidacji adresu e-mail dla Kroku 2.
 - `src/components/layout/ControlPanel.vue` — panel kontrolny (przełączniki muzyki/śniegu/lampek/ramki, combobox `Tryb dev: OFF/ON` + pasek szybkiego skakania między krokami w trybie deweloperskim).
 - `src/components/layout/StageContainer.vue` — duży, kwadratowy główny kontener ładujący aktywny krok formularza.
 
 ---
 
 ## 7. Historia zmian
+
+- **2026-11-24 (Krok 2: E-mail)**: Zaimplementowano `Step02Email.vue` oraz `emailValidation.ts` z 9 irytującymi regułami walidacji (format, >=50 znaków, chiński pies `狗`, >=3 cyfry o sumie 14, emotka, imię renifera, `XXIV`, zakaz małej litery `e`, domena `.pl`/`.ho`/`.xmas`) oraz tymczasowy `Step03Placeholder.vue`.
 
 - **2026-11-24 (Krok 1 + Vue Router)**: Dodano `vue-router` (`createWebHashHistory` + strażnik kroków w `src/router/index.ts`) oraz zaimplementowano `Step01Credentials.vue` (username z 3-bębnowego jednorękiego bandyty + pojedyncze pole hasła wpisywanego wspak z efektem świeczki na kursorze, zapis w Pinia, respektowanie `devMode`) oraz tymczasowy `Step02Placeholder.vue`.
 - **2026-11-24 (Tryb deweloperski — korekta)**: Zawężono `devMode` wyłącznie do wyciszenia muzyki (`effectiveMusicVolume = 0`) i odblokowania przechodzenia między krokami (`dev-step-select`, `dev-prev-btn`, `dev-next-btn`), zachowując wszystkie animacje, śnieg, lampki i efekt świeczki aktywne do testów.
