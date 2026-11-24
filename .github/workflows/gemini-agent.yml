@@ -42,10 +42,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "gemini-cli[bot]"
+          git config --global user.email "gemini-cli[bot]@users.noreply.github.com"
+
       - name: Run Gemini CLI Agent
         uses: google-github-actions/run-gemini-cli@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_CLI_TRUST_WORKSPACE: 'true'
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
