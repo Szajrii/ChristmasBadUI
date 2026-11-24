@@ -22,8 +22,6 @@ export const useRegistrationStore = defineStore('registration', () => {
   const isVolumeGameOpen = ref(false)
 
   const effectiveMusicVolume = computed(() => (devMode.value ? 0 : musicVolume.value))
-  const effectiveSnowEnabled = computed(() => !devMode.value && settings.value.snowEnabled)
-  const effectiveLightsEnabled = computed(() => !devMode.value && settings.value.lightsEnabled)
 
   const totalSteps = computed(() => registrationSteps.length)
   const currentStep = computed(() => registrationSteps[currentStepIndex.value])
@@ -117,8 +115,6 @@ export const useRegistrationStore = defineStore('registration', () => {
     musicVolume,
     isVolumeGameOpen,
     effectiveMusicVolume,
-    effectiveSnowEnabled,
-    effectiveLightsEnabled,
     totalSteps,
     currentStep,
     isCurrentStepCompleted,

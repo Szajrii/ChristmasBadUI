@@ -38,7 +38,7 @@ const store = useRegistrationStore()
 
         <!-- Footer status bar -->
         <div class="border-t-2 border-dashed border-yellow-300/60 pt-2">
-          <ChristmasLights :enabled="store.effectiveLightsEnabled" :count="10" />
+          <ChristmasLights :enabled="store.settings.lightsEnabled" :count="10" />
           <div class="mt-1 flex items-center justify-between text-xs text-yellow-200/90">
             <span>🎁 Postęp: {{ store.progressPercent }}%</span>
             <span>🦌 Okno {{ store.currentStepIndex + 1 }} z {{ store.totalSteps }}</span>

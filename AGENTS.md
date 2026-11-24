@@ -13,7 +13,7 @@ Witaj, agencie! Pracujesz nad projektem **ChristmasBadUI** — celowo kiczowatym
    - Cały projekt (lokalnie i w GitHub Actions) działa na **`pnpm`**. Nie używaj `npm` ani `yarn` i nie commituj `package-lock.json`.
 4. **Projekt rozwijany jest etapami — modularność, tryb dev i osobne skille**:
    - Nie przepisuj architektury bez wyraźnej potrzeby. Buduj małe, reużywalne komponenty w `src/components/ui/` i rejestruj nowe kroki formularza w `src/steps/stepRegistry.ts`.
-   - **Szacunek dla `store.devMode`**: każda nowa irytująca/przeszkadzająca mechanika (dźwięki, timery, uciekające elementy, animacje chaosu) musi wyłączać się automatycznie, gdy `store.devMode === true`.
+   - **Szacunek dla `store.devMode`**: gdy `store.devMode === true`, wyciszona zostaje muzyka (oraz ewentualne inne głośne dźwięki) i odblokowana zostaje nawigacja między krokami bez ich zaliczania; animacje wizualne oraz mechaniki UI (np. przyciemnianie, uciekające elementy) pozostają aktywne, aby dało się je testować.
    - Dla każdego nowego widoku/formularza utwórz **osobny skill** w `.agents/skills/step-XX-<nazwa>/SKILL.md` (wzór: `.agents/skills/step-00-home/SKILL.md`).
 5. **Aktualizuj dokumentację na bieżąco (Living Documentation)**:
    - Po dodaniu lub zmianie kroku formularza, komponentu UI, skilla lub opcji w panelu kontrolnym **zawsze zaktualizuj** `docs/PROJECT_SPEC.md` (sekcje kroków, skilli oraz „Historia zmian").

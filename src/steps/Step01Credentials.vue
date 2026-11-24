@@ -17,9 +17,7 @@ const candleX = ref(0)
 const candleY = ref(0)
 
 const isPasswordValid = computed(() => password.value.length >= 6)
-const canSubmit = computed(
-  () => !isSpinning.value && (hasSpun.value || store.devMode) && isPasswordValid.value
-)
+const canSubmit = computed(() => !isSpinning.value && hasSpun.value && isPasswordValid.value)
 
 function handleSlotChange(payload: { username: string; hasSpun: boolean; isSpinning: boolean }) {
   generatedUsername.value = payload.username
@@ -31,12 +29,7 @@ function handlePasswordInput(event: Event) {
   const input = event.target as HTMLInputElement
   const nextVal = input.value
 
-  if (store.devMode) {
-    password.value = nextVal
-    return
-  }
-
-  // W trybie normalnym nowe znaki doklejane są na początek (pisanie od tyłu!)
+  // Nowo wpisane znaki doklejane są na początek (pisanie od tyłu!)
   if (nextVal.length > password.value.length) {
     const added = nextVal.slice(password.value.length)
     const reversedAdded = added.split('').reverse().join('')
@@ -61,7 +54,6 @@ function hideCandle() {
 }
 
 const candleOverlayStyle = computed(() => {
-  if (store.devMode) return {}
   if (!candleActive.value) {
     return { background: 'rgba(4, 4, 10, 0.98)' }
   }
@@ -87,10 +79,7 @@ function submitCredentials() {
     @submit.prevent="submitCredentials"
   >
     <!-- Sekcja 1: Animowany Jednoręki Bandyta dla Username -->
-    <SlotMachineUsername
-      :dev-mode="store.devMode"
-      @change="handleSlotChange"
-    />
+    <SlotMachineUsername @change="handleSlotChange" />
 
     <!-- Sekcja 2: Hasło pisane od tyłu + efekt świeczki na kursorze -->
     <div
@@ -104,7 +93,7 @@ function submitCredentials() {
         for="backwards-password"
         class="mb-1.5 block text-xs font-bold text-yellow-300"
       >
-        🔐 Hasło (min. 6 znaków — {{ store.devMode ? 'Tryb DEV: normalnie' : 'wpisuj wspak przy świeczce 🕯️!' }})
+        🔐 Hasło (min. 6 znaków — wpisuj wspak przy świeczce 🕯️!)
       </label>
 
       <input
@@ -124,7 +113,6 @@ function submitCredentials() {
 
       <!-- Warstwa ciemności ze świeczką podążającą za kursorem -->
       <div
-        v-if="!store.devMode"
         data-testid="candle-overlay"
         aria-hidden="true"
         class="pointer-events-none absolute inset-0 z-10 transition-opacity duration-150"

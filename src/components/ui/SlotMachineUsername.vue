@@ -5,7 +5,6 @@ import KitschButton from './KitschButton.vue'
 const props = withDefaults(
   defineProps<{
     usernames?: string[]
-    devMode?: boolean
     spinDurationMs?: number
   }>(),
   {
@@ -27,7 +26,6 @@ const props = withDefaults(
       'Szybki_Śnieżek_321',
       'Wesoły_Kominiarz_25',
     ],
-    devMode: false,
     spinDurationMs: 1600,
   }
 )
@@ -75,7 +73,7 @@ function pullLever() {
   selectedIndex.value = nextIdx
   hasSpun.value = true
 
-  if (props.devMode || props.spinDurationMs <= 0) {
+  if (props.spinDurationMs <= 0) {
     visualOffset.value = nextIdx
     isSpinning.value = false
     leverPulled.value = false

@@ -53,7 +53,7 @@ onUnmounted(() => {
 
 <template>
   <div class="relative flex min-h-screen flex-col">
-    <SnowfallOverlay :enabled="store.effectiveSnowEnabled" />
+    <SnowfallOverlay :enabled="store.settings.snowEnabled" />
 
     <ControlPanel />
 

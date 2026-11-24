@@ -22,7 +22,7 @@ function onDevStepChange(event: Event) {
     data-testid="control-panel"
     class="relative z-20 w-full border-b-4 border-yellow-400 bg-gradient-to-r from-red-900 via-emerald-900 to-red-900 shadow-[0_6px_24px_rgba(0,0,0,0.6)]"
   >
-    <ChristmasLights :enabled="store.effectiveLightsEnabled" :count="18" />
+    <ChristmasLights :enabled="store.settings.lightsEnabled" :count="18" />
 
     <div
       class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3"
@@ -55,21 +55,19 @@ function onDevStepChange(event: Event) {
         <KitschButton
           data-testid="toggle-snow-btn"
           variant="elf"
-          :active="store.effectiveSnowEnabled"
-          :disabled="store.devMode"
+          :active="store.settings.snowEnabled"
           @click="store.toggleSetting('snowEnabled')"
         >
-          ❄️ Śnieg: {{ store.effectiveSnowEnabled ? 'ON' : 'OFF' }}
+          ❄️ Śnieg: {{ store.settings.snowEnabled ? 'ON' : 'OFF' }}
         </KitschButton>
 
         <KitschButton
           data-testid="toggle-lights-btn"
           variant="gold"
-          :active="store.effectiveLightsEnabled"
-          :disabled="store.devMode"
+          :active="store.settings.lightsEnabled"
           @click="store.toggleSetting('lightsEnabled')"
         >
-          💡 Lampki: {{ store.effectiveLightsEnabled ? 'ON' : 'OFF' }}
+          💡 Lampki: {{ store.settings.lightsEnabled ? 'ON' : 'OFF' }}
         </KitschButton>
 
         <KitschButton
@@ -106,7 +104,7 @@ function onDevStepChange(event: Event) {
     >
       <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 text-xs">
         <span class="font-bold text-lime-300">
-          🛠️ TRYB DEWELOPERSKI AKTYWNY — muzyka i upierdliwe efekty wyłączone, kroki odblokowane
+          🛠️ TRYB DEWELOPERSKI AKTYWNY — muzyka wyciszona, wszystkie kroki odblokowane (animacje i efekty działają)
         </span>
 
         <div class="flex items-center gap-2">
