@@ -25,6 +25,7 @@
 | Bundler | Vite 8 |
 | Stylowanie | Tailwind CSS v4 (`@tailwindcss/vite`) |
 | Zarządzanie stanem | Pinia |
+| Routing | Vue Router (`createWebHashHistory`, guard kroków) |
 | Testy jednostkowe | Vitest + `@vue/test-utils` + `jsdom` |
 | CI/CD & Hosting | GitHub Actions + GitHub Pages |
 
@@ -68,7 +69,8 @@
 | # | ID | Nazwa kroku | Plik komponentu | Dedykowany skill | Status |
 | :-: | :--- | :--- | :--- | :--- | :--- |
 | 0 | `home` | Świąteczna Strona Główna | `src/steps/Step00Home.vue` | `.agents/skills/step-00-home/SKILL.md` | Zaimplementowany (Issue #2) |
-| 1 | `step-01-placeholder` | Krok 1: Rejestracja (Pusty placeholder) | `src/steps/Step01RegistrationPlaceholder.vue` | `.agents/skills/step-01-registration-placeholder/SKILL.md` | Tymczasowy (Issue #2) |
+| 1 | `step-01-credentials` | Krok 1: Login i Hasło | `src/steps/Step01Credentials.vue` | `.agents/skills/step-01-credentials/SKILL.md` | Zaimplementowany |
+| 2 | `step-02-placeholder` | Krok 2: Wkrótce (Placeholder) | `src/steps/Step02Placeholder.vue` | `.agents/skills/step-02-placeholder/SKILL.md` | Tymczasowy |
 
 ---
 
@@ -76,10 +78,11 @@
 
 | Nazwa skilla | Plik | Przeznaczenie |
 | :--- | :--- | :--- |
-| `christmas-bad-ui` | `.agents/skills/christmas-bad-ui/SKILL.md` | Ogólna architektura, stack (`pnpm`, Vue 3, Vite 8, Tailwind v4, Pinia, Vitest), zasady modularności |
+| `christmas-bad-ui` | `.agents/skills/christmas-bad-ui/SKILL.md` | Ogólna architektura, stack (`pnpm`, Vue 3, Vite 8, Tailwind v4, Pinia, Vue Router, Vitest), zasady modularności |
 | `clarify-and-propose` | `.agents/skills/clarify-and-propose/SKILL.md` | Procedura zadawania pytań użytkownikowi i proponowania własnych rozwiązań przy niejasnych zadaniach |
 | `step-00-home` | `.agents/skills/step-00-home/SKILL.md` | Strona główna z przyciskami Logowanie (okno dialogowe) i Rejestracja (Issue #2) |
-| `step-01-registration-placeholder` | `.agents/skills/step-01-registration-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 1 rejestracji (cel przejścia ze strony głównej) |
+| `step-01-credentials` | `.agents/skills/step-01-credentials/SKILL.md` | Krok 1: jednoręki bandyta dla username + hasło wspak z efektem świeczki na kursorze |
+| `step-02-placeholder` | `.agents/skills/step-02-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 2 rejestracji |
 | `control-volume-bauble-game` | `.agents/skills/control-volume-bauble-game/SKILL.md` | Głośna muzyka „Last Christmas” na starcie oraz 10s mini-gra z 20 bombkami wyciszającymi dźwięk |
 
 ---
@@ -89,6 +92,7 @@
 - `src/components/ui/KitschButton.vue` — świąteczny przycisk w wariantach (`santa`, `elf`, `gold`, `grinch`).
 - `src/components/ui/KitschCard.vue` — ramka w stylu laski cukrowej / kiczowatej kartki świątecznej.
 - `src/components/ui/KitschModal.vue` — reużywalne okno dialogowe oparte na `KitschCard`.
+- `src/components/ui/SlotMachineUsername.vue` — retro skrzynka jednorękiego bandyty z mechaniczną dźwignią i pojedynczym okienkiem bębna losującym 1 `username`.
 - `src/components/ui/ChristmasLights.vue` — pasek migających lampek choinkowych.
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
@@ -100,6 +104,7 @@
 
 ## 7. Historia zmian
 
+- **2026-11-24 (Krok 1 + Vue Router)**: Dodano `vue-router` (`createWebHashHistory` + strażnik kroków w `src/router/index.ts`) oraz zaimplementowano `Step01Credentials.vue` (username z 3-bębnowego jednorękiego bandyty + pojedyncze pole hasła wpisywanego wspak z efektem świeczki na kursorze, zapis w Pinia, respektowanie `devMode`) oraz tymczasowy `Step02Placeholder.vue`.
 - **2026-11-24 (Tryb deweloperski)**: Dodano combobox `Tryb dev: OFF/ON` (domyślnie wyłączony) w `ControlPanel.vue`; po włączeniu odblokowuje przechodzenie między wszystkimi krokami bez ich zaliczania (`dev-step-select`, `dev-prev-btn`, `dev-next-btn`), wycisza muzykę (`effectiveMusicVolume = 0`) oraz wyłącza śnieg/lampki i przyszłe upierdliwe mechaniki oparte o `store.devMode`.
 - **2026-11-24 (Issue #2)**: Przekształcono widok startowy w Stronę Główną (`Step00Home.vue`) z przyciskami **Logowanie** (otwierającym reużywalny `KitschModal.vue` z komunikatem o braku kont i przyciskiem do rejestracji) oraz **Rejestracja** przenoszącym do pustego `Step01RegistrationPlaceholder.vue`; dodano skille `step-00-home` i `step-01-registration-placeholder` oraz testy.
 

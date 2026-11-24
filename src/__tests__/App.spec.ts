@@ -1,15 +1,29 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { createPinia, setActivePinia } from 'pinia'
+import { createMemoryHistory } from 'vue-router'
 import App from '../App.vue'
+import { createAppRouter } from '../router'
+
+async function mountAppAt(initialPath = '/') {
+  const pinia = createPinia()
+  setActivePinia(pinia)
+  const router = createAppRouter(createMemoryHistory())
+  await router.push(initialPath)
+  await router.isReady()
+
+  const wrapper = mount(App, {
+    global: {
+      plugins: [pinia, router],
+    },
+  })
+
+  return { wrapper, router }
+}
 
 describe('App.vue', () => {
   it('renders control panel, square stage container, and home step with direct registration', async () => {
-    const wrapper = mount(App, {
-      global: {
-        plugins: [createPinia()],
-      },
-    })
+    const { wrapper, router } = await mountAppAt('/')
 
     expect(wrapper.find('[data-testid="control-panel"]').exists()).toBe(true)
     expect(wrapper.find('[data-testid="stage-container"]').exists()).toBe(true)
@@ -29,17 +43,21 @@ describe('App.vue', () => {
     await snowBtn.trigger('click')
     expect(snowBtn.text()).toContain('OFF')
 
-    // Click Register -> navigates to Step 1 placeholder
+    // Click Register -> navigates via router to Step 1 (/krok-1)
     await wrapper.find('[data-testid="home-register-btn"]').trigger('click')
-    expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
+    await vi.waitFor(() => {
+      expect(router.currentRoute.value.path).toBe('/krok-1')
+    })
+    expect(wrapper.find('[data-testid="step-01-credentials"]').exists()).toBe(true)
+  })
+
+  it('blocks direct URL access to locked step when devMode is off', async () => {
+    const { router } = await mountAppAt('/krok-2')
+    expect(router.currentRoute.value.path).toBe('/')
   })
 
   it('opens login modal telling nobody has an account and redirects to registration', async () => {
-    const wrapper = mount(App, {
-      global: {
-        plugins: [createPinia()],
-      },
-    })
+    const { wrapper, router } = await mountAppAt('/')
 
     expect(wrapper.find('[data-testid="login-modal"]').exists()).toBe(false)
     await wrapper.find('[data-testid="home-login-btn"]').trigger('click')
@@ -49,16 +67,14 @@ describe('App.vue', () => {
     expect(modal.text()).toContain('nikt jeszcze nie ma konta')
 
     await wrapper.find('[data-testid="login-modal-register-btn"]').trigger('click')
-    expect(wrapper.find('[data-testid="login-modal"]').exists()).toBe(false)
-    expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
+    await vi.waitFor(() => {
+      expect(router.currentRoute.value.path).toBe('/krok-1')
+    })
+    expect(wrapper.find('[data-testid="step-01-credentials"]').exists()).toBe(true)
   })
 
   it('enables developer mode via combobox, mutes music, and allows jumping steps', async () => {
-    const wrapper = mount(App, {
-      global: {
-        plugins: [createPinia()],
-      },
-    })
+    const { wrapper, router } = await mountAppAt('/')
 
     const devSelect = wrapper.find('[data-testid="dev-mode-select"]')
     expect((devSelect.element as HTMLSelectElement).value).toBe('off')
@@ -71,6 +87,9 @@ describe('App.vue', () => {
 
     // Jump directly to Step 1 without completing Step 0
     await wrapper.find('[data-testid="dev-next-btn"]').trigger('click')
-    expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
+    await vi.waitFor(() => {
+      expect(router.currentRoute.value.path).toBe('/krok-1')
+    })
+    expect(wrapper.find('[data-testid="step-01-credentials"]').exists()).toBe(true)
   })
 })

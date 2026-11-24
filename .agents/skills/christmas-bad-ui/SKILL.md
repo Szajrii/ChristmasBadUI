@@ -20,6 +20,7 @@ Ten skill opisuje ogólne zasady budowy projektu **ChristmasBadUI**. Poszczegól
 - **Vite 8** (konfiguracja w `vite.config.ts`)
 - **Tailwind CSS v4** (`@tailwindcss/vite`, konfiguracja stylów i tokenów w `src/style.css` przez `@theme`)
 - **Pinia** (zarządzanie stanem kroków, postępem rejestracji i ustawieniami panelu kontrolnego w `src/stores/registrationStore.ts`)
+- **Vue Router** (`createWebHashHistory`, definicja tras i strażnika kroków w `src/router/index.ts`, ścieżki `path` w `src/steps/stepRegistry.ts`)
 - **Vitest + @vue/test-utils + jsdom** (proste testy jednostkowe w `src/__tests__/`)
 - **Hosting**: GitHub Pages (statyczny build, zmienna `BASE_PATH=/ChristmasBadUI/` w CI).
 

@@ -1,16 +1,14 @@
-import type { Component } from 'vue'
-
 export interface RegistrationStepDefinition {
-  /** Unikalny identyfikator kroku (np. 'step-01-username') */
+  /** Unikalny identyfikator kroku (np. 'step-01-credentials') */
   id: string
+  /** Ścieżka w vue-router (np. '/', '/krok-1') */
+  path: string
   /** Tytuł wyświetlany w nagłówku kontenera */
   title: string
   /** Krótki, kiczowaty podtytuł / instrukcja */
   subtitle: string
   /** Ikona emoji przypisana do kroku */
   icon: string
-  /** Komponent Vue ładowany wewnątrz StageContainer */
-  component: Component
 }
 
 export interface ControlPanelSettings {

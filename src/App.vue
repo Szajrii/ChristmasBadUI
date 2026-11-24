@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { useRegistrationStore } from './stores/registrationStore'
+import { registrationSteps } from './steps/stepRegistry'
 import { FestiveAudioPlayer } from './utils/lastChristmasAudio'
 import SnowfallOverlay from './components/ui/SnowfallOverlay.vue'
 import ControlPanel from './components/layout/ControlPanel.vue'
@@ -8,6 +10,7 @@ import StageContainer from './components/layout/StageContainer.vue'
 import VolumeBaubleGameModal from './components/ui/VolumeBaubleGameModal.vue'
 
 const store = useRegistrationStore()
+const router = useRouter()
 const audioPlayer = new FestiveAudioPlayer()
 
 function handleFirstInteraction() {
@@ -22,6 +25,16 @@ watch(
   () => store.effectiveMusicVolume,
   (newVolume) => {
     audioPlayer.setVolume(newVolume)
+  }
+)
+
+watch(
+  () => store.currentStepIndex,
+  (newIndex) => {
+    const targetStep = registrationSteps[newIndex]
+    if (targetStep && router.currentRoute.value.path !== targetStep.path) {
+      void router.push(targetStep.path)
+    }
   }
 )
 
@@ -46,7 +59,7 @@ onUnmounted(() => {
 
     <main class="flex flex-1 flex-col">
       <StageContainer>
-        <component :is="store.currentStep.component" v-if="store.currentStep" />
+        <router-view />
       </StageContainer>
     </main>
 

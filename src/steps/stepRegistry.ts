@@ -1,25 +1,29 @@
-import { markRaw } from 'vue'
 import type { RegistrationStepDefinition } from '../types/step'
-import Step00Home from './Step00Home.vue'
-import Step01RegistrationPlaceholder from './Step01RegistrationPlaceholder.vue'
 
 /**
- * Centralny rejestr kroków formularza rejestracyjnego.
- * Kolejne etapy (Step01..., Step02...) dopisujemy tutaj w kolejności przechodzenia.
+ * Centralny rejestr kroków formularza rejestracyjnego (metadane i ścieżki routera).
+ * Komponenty podpinane są w src/router/index.ts, aby uniknąć cyklicznych importów ze store.
  */
 export const registrationSteps: RegistrationStepDefinition[] = [
   {
     id: 'home',
+    path: '/',
     title: 'Świąteczna Strona Główna',
     subtitle: 'Zaloguj się (powodzenia!) albo rozpocznij kiczowatą rejestrację!',
     icon: '🎄',
-    component: markRaw(Step00Home),
   },
   {
-    id: 'step-01-placeholder',
-    title: 'Krok 1: Rejestracja',
-    subtitle: 'Pierwsze okno rejestracyjne (na razie puste — w budowie!)',
+    id: 'step-01-credentials',
+    path: '/krok-1',
+    title: 'Krok 1: Login i Hasło',
+    subtitle: 'Wylosuj swój świąteczny nick i wpisz hasło wspak przy świeczce!',
+    icon: '🎰',
+  },
+  {
+    id: 'step-02-placeholder',
+    path: '/krok-2',
+    title: 'Krok 2: Wkrótce',
+    subtitle: 'Kolejne okno rejestracyjne (w budowie!)',
     icon: '🎁',
-    component: markRaw(Step01RegistrationPlaceholder),
   },
 ]
