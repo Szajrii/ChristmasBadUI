@@ -22,9 +22,22 @@ function handleVolumeGameComplete(payload: { reductionPercent: number; allClicke
 }
 
 watch(
+  () => store.devMode,
+  (isDev) => {
+    if (isDev) {
+      audioPlayer.stop()
+    } else {
+      audioPlayer.start(store.effectiveMusicVolume)
+    }
+  }
+)
+
+watch(
   () => store.effectiveMusicVolume,
   (newVolume) => {
-    audioPlayer.setVolume(newVolume)
+    if (!store.devMode) {
+      audioPlayer.setVolume(newVolume)
+    }
   }
 )
 
@@ -39,7 +52,9 @@ watch(
 )
 
 onMounted(() => {
-  audioPlayer.start(store.effectiveMusicVolume)
+  if (!store.devMode) {
+    audioPlayer.start(store.effectiveMusicVolume)
+  }
   window.addEventListener('pointerdown', handleFirstInteraction, { passive: true })
   window.addEventListener('keydown', handleFirstInteraction, { passive: true })
 })

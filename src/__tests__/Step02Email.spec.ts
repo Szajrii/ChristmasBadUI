@@ -52,4 +52,16 @@ describe('Step02Email.vue', () => {
     expect(store.completedStepIds).toContain('step-02-email')
     expect(store.currentStepIndex).toBe(3)
   })
+
+  it('allows advancing with empty/invalid email when devMode is enabled', async () => {
+    const store = useRegistrationStore()
+    store.setDevMode(true)
+    store.goToStep(2)
+
+    const wrapper = mount(Step02Email)
+    expect(wrapper.find('[data-testid="step-02-submit-btn"]').attributes('disabled')).toBeUndefined()
+
+    await wrapper.find('form').trigger('submit')
+    expect(store.currentStepIndex).toBe(3)
+  })
 })

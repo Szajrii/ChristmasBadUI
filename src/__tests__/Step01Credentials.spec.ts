@@ -54,12 +54,13 @@ describe('Step01Credentials.vue', () => {
     expect(store.currentStepIndex).toBe(2)
   })
 
-  it('keeps candle darkness and backwards typing active even when devMode is enabled', async () => {
+  it('keeps candle darkness and backwards typing active even when devMode is enabled, while keeping next button active', async () => {
     const store = useRegistrationStore()
     store.setDevMode(true)
 
     const wrapper = mount(Step01Credentials)
     expect(wrapper.find('[data-testid="candle-overlay"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="step-01-submit-btn"]').attributes('disabled')).toBeUndefined()
 
     const input = wrapper.find('[data-testid="backwards-password-input"]')
     for (const ch of ['a', 'b', 'c']) {

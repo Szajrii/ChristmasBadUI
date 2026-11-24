@@ -17,7 +17,9 @@ const candleX = ref(0)
 const candleY = ref(0)
 
 const isPasswordValid = computed(() => password.value.length >= 6)
-const canSubmit = computed(() => !isSpinning.value && hasSpun.value && isPasswordValid.value)
+const canSubmit = computed(
+  () => store.devMode || (!isSpinning.value && hasSpun.value && isPasswordValid.value)
+)
 
 function handleSlotChange(payload: { username: string; hasSpun: boolean; isSpinning: boolean }) {
   generatedUsername.value = payload.username

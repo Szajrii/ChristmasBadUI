@@ -9,12 +9,14 @@ const email = ref((store.formData.email as string | undefined) ?? '')
 const currentError = ref<EmailRuleResult | null>(null)
 
 function submitEmail() {
-  const rules = evaluateEmailRules(email.value)
-  const firstFailing = rules.find((rule) => !rule.passed) ?? null
+  if (!store.devMode) {
+    const rules = evaluateEmailRules(email.value)
+    const firstFailing = rules.find((rule) => !rule.passed) ?? null
 
-  if (firstFailing) {
-    currentError.value = firstFailing
-    return
+    if (firstFailing) {
+      currentError.value = firstFailing
+      return
+    }
   }
 
   currentError.value = null
