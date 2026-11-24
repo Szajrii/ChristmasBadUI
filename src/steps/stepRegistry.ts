@@ -27,10 +27,17 @@ export const registrationSteps: RegistrationStepDefinition[] = [
     icon: '📧',
   },
   {
-    id: 'step-03-placeholder',
+    id: 'step-03-interests',
     path: '/krok-3',
-    title: 'Krok 3: Wkrótce',
-    subtitle: 'Kolejne okno rejestracyjne (w budowie!)',
+    title: 'Krok 3: Zainteresowania',
+    subtitle: 'Wybierz swoje świąteczne hobby — uważaj, w co klikasz!',
     icon: '🎁',
+  },
+  {
+    id: 'step-04-placeholder',
+    path: '/krok-4',
+    title: 'Krok 4: Wkrótce',
+    subtitle: 'Kolejne okno rejestracyjne (w budowie!)',
+    icon: '🦌',
   },
 ]

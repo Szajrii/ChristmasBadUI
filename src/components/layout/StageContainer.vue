@@ -14,7 +14,7 @@ const store = useRegistrationStore()
     <KitschCard
       data-testid="stage-container"
       :striped-border="store.settings.kitschBorderEnabled"
-      class="aspect-square w-full max-w-[600px]"
+      class="aspect-square w-full max-w-[780px]"
     >
       <div class="flex h-full flex-col justify-between p-5 sm:p-7">
         <!-- Step header -->
