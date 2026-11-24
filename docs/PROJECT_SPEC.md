@@ -72,7 +72,8 @@
 | 1 | `step-01-credentials` | Krok 1: Login i Hasło | `src/steps/Step01Credentials.vue` | `.agents/skills/step-01-credentials/SKILL.md` | Zaimplementowany |
 | 2 | `step-02-email` | Krok 2: Świąteczny E-mail | `src/steps/Step02Email.vue` | `.agents/skills/step-02-email/SKILL.md` | Zaimplementowany |
 | 3 | `step-03-interests` | Krok 3: Zainteresowania | `src/steps/Step03Interests.vue` | `.agents/skills/step-03-interests/SKILL.md` | Zaimplementowany |
-| 4 | `step-04-placeholder` | Krok 4: Wkrótce (Placeholder) | `src/steps/Step04Placeholder.vue` | `.agents/skills/step-04-placeholder/SKILL.md` | Tymczasowy |
+| 4 | `step-04-memory` | Krok 4: Świąteczne Memory | `src/steps/Step04Memory.vue` | `.agents/skills/step-04-memory/SKILL.md` | Zaimplementowany |
+| 5 | `step-05-placeholder` | Krok 5: Wkrótce (Placeholder) | `src/steps/Step05Placeholder.vue` | `.agents/skills/step-05-placeholder/SKILL.md` | Tymczasowy |
 
 ---
 
@@ -86,7 +87,8 @@
 | `step-01-credentials` | `.agents/skills/step-01-credentials/SKILL.md` | Krok 1: jednoręki bandyta dla username + hasło wspak z efektem świeczki na kursorze |
 | `step-02-email` | `.agents/skills/step-02-email/SKILL.md` | Krok 2: e-mail z 9 absurdalnymi regułami (50+ znaków, 狗, suma cyfr 14, emotka, renifer, XXIV, brak małego e, TLD) |
 | `step-03-interests` | `.agents/skills/step-03-interests/SKILL.md` | Krok 3: 30 checkboxów w 3 kolumnach z ukrytą pułapką „Wyczyść wszystko” |
-| `step-04-placeholder` | `.agents/skills/step-04-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 4 rejestracji |
+| `step-04-memory` | `.agents/skills/step-04-memory/SKILL.md` | Krok 4: świąteczna gra Memory (4 pary kart) |
+| `step-05-placeholder` | `.agents/skills/step-05-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 5 rejestracji |
 | `control-volume-bauble-game` | `.agents/skills/control-volume-bauble-game/SKILL.md` | Głośna muzyka „Last Christmas” na starcie oraz 10s mini-gra z 20 bombkami wyciszającymi dźwięk |
 
 ---
@@ -102,12 +104,15 @@
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
 - `src/utils/lastChristmasAudio.ts` — statyczny syntezator melodii „Last Christmas” w Web Audio API.
 - `src/utils/emailValidation.ts` — zestaw 9 absurdalnych reguł walidacji adresu e-mail dla Kroku 2.
+- `src/utils/memoryGame.ts` — generator przetasowanej talii kart dla gry Memory w Kroku 4.
 - `src/components/layout/ControlPanel.vue` — panel kontrolny (przełączniki muzyki/śniegu/lampek/ramki, combobox `Tryb dev: OFF/ON` + pasek szybkiego skakania między krokami w trybie deweloperskim).
 - `src/components/layout/StageContainer.vue` — duży, kwadratowy główny kontener ładujący aktywny krok formularza.
 
 ---
 
 ## 7. Historia zmian
+
+- **2026-11-24 (Krok 4: Świąteczne Memory)**: Zaimplementowano `Step04Memory.vue` oraz `memoryGame.ts` (4 pary świątecznych symboli; nietrafione karty zakrywają się ponownie bez resetowania dopasowanych par + po 5s dialog z fałszywą opcją wykupienia skipu 1/2/3 kroków za $2/$3/$5) oraz tymczasowy `Step05Placeholder.vue`.
 
 - **2026-11-24 (Powiększenie głównego kontenera)**: Zwiększono rozmiar głównego kwadratu w `StageContainer.vue` (`max-w-[780px]`) oraz wysokość listy w `Step03Interests.vue`, aby mieściło się więcej treści bez ciasnego scrollowania.
 - **2026-11-24 (Krok 3: Zainteresowania)**: Zaimplementowano `Step03Interests.vue` (30 checkboxów w 3 kolumnach, wymagane zaznaczenie wszystkich poza ukrytym checkboxem-pułapką `Wyczyść wszystko`, który kasuje cały wybór) oraz tymczasowy `Step04Placeholder.vue`.

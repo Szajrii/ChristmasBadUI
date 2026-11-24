@@ -34,9 +34,16 @@ export const registrationSteps: RegistrationStepDefinition[] = [
     icon: '🎁',
   },
   {
-    id: 'step-04-placeholder',
+    id: 'step-04-memory',
     path: '/krok-4',
-    title: 'Krok 4: Wkrótce',
+    title: 'Krok 4: Świąteczne Memory',
+    subtitle: 'Znajdź wszystkie świąteczne pary na planszy!',
+    icon: '🃏',
+  },
+  {
+    id: 'step-05-placeholder',
+    path: '/krok-5',
+    title: 'Krok 5: Wkrótce',
     subtitle: 'Kolejne okno rejestracyjne (w budowie!)',
     icon: '🦌',
   },
