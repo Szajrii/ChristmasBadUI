@@ -8,6 +8,9 @@ export const useRegistrationStore = defineStore('registration', () => {
   const completedStepIds = ref<string[]>([])
   const formData = ref<Record<string, unknown>>({})
 
+  // Tryb deweloperski (domyślnie wyłączony): odblokowuje wszystkie kroki i wycisza/wyłącza upierdliwe efekty
+  const devMode = ref(false)
+
   const settings = ref<ControlPanelSettings>({
     snowEnabled: true,
     lightsEnabled: true,
@@ -18,13 +21,19 @@ export const useRegistrationStore = defineStore('registration', () => {
   const musicVolume = ref(100)
   const isVolumeGameOpen = ref(false)
 
+  const effectiveMusicVolume = computed(() => (devMode.value ? 0 : musicVolume.value))
+  const effectiveSnowEnabled = computed(() => !devMode.value && settings.value.snowEnabled)
+  const effectiveLightsEnabled = computed(() => !devMode.value && settings.value.lightsEnabled)
+
   const totalSteps = computed(() => registrationSteps.length)
   const currentStep = computed(() => registrationSteps[currentStepIndex.value])
   const isCurrentStepCompleted = computed(() =>
     currentStep.value ? completedStepIds.value.includes(currentStep.value.id) : false
   )
   const canGoNext = computed(
-    () => isCurrentStepCompleted.value && currentStepIndex.value < totalSteps.value - 1
+    () =>
+      (devMode.value || isCurrentStepCompleted.value) &&
+      currentStepIndex.value < totalSteps.value - 1
   )
   const canGoPrevious = computed(() => currentStepIndex.value > 0)
   const progressPercent = computed(() => {
@@ -33,9 +42,17 @@ export const useRegistrationStore = defineStore('registration', () => {
   })
 
   function isStepUnlocked(index: number): boolean {
-    if (index <= 0) return true
+    if (index < 0 || index >= totalSteps.value) return false
+    if (devMode.value || index === 0) return true
     const previousStep = registrationSteps[index - 1]
     return previousStep ? completedStepIds.value.includes(previousStep.id) : false
+  }
+
+  function setDevMode(enabled: boolean) {
+    devMode.value = enabled
+    if (enabled) {
+      isVolumeGameOpen.value = false
+    }
   }
 
   function completeStep(stepId: string, payload?: Record<string, unknown>) {
@@ -60,7 +77,6 @@ export const useRegistrationStore = defineStore('registration', () => {
   }
 
   function goToStep(index: number): boolean {
-    if (index < 0 || index >= totalSteps.value) return false
     if (!isStepUnlocked(index)) return false
     currentStepIndex.value = index
     return true
@@ -96,9 +112,13 @@ export const useRegistrationStore = defineStore('registration', () => {
     currentStepIndex,
     completedStepIds,
     formData,
+    devMode,
     settings,
     musicVolume,
     isVolumeGameOpen,
+    effectiveMusicVolume,
+    effectiveSnowEnabled,
+    effectiveLightsEnabled,
     totalSteps,
     currentStep,
     isCurrentStepCompleted,
@@ -106,6 +126,7 @@ export const useRegistrationStore = defineStore('registration', () => {
     canGoPrevious,
     progressPercent,
     isStepUnlocked,
+    setDevMode,
     completeStep,
     goToNextStep,
     goToPreviousStep,

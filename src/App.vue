@@ -19,14 +19,14 @@ function handleVolumeGameComplete(payload: { reductionPercent: number; allClicke
 }
 
 watch(
-  () => store.musicVolume,
+  () => store.effectiveMusicVolume,
   (newVolume) => {
     audioPlayer.setVolume(newVolume)
   }
 )
 
 onMounted(() => {
-  audioPlayer.start(store.musicVolume)
+  audioPlayer.start(store.effectiveMusicVolume)
   window.addEventListener('pointerdown', handleFirstInteraction, { passive: true })
   window.addEventListener('keydown', handleFirstInteraction, { passive: true })
 })
@@ -40,7 +40,7 @@ onUnmounted(() => {
 
 <template>
   <div class="relative flex min-h-screen flex-col">
-    <SnowfallOverlay :enabled="store.settings.snowEnabled" />
+    <SnowfallOverlay :enabled="store.effectiveSnowEnabled" />
 
     <ControlPanel />
 

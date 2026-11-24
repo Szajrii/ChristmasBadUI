@@ -73,4 +73,27 @@ describe('registrationStore', () => {
     expect(store.musicVolume).toBe(0)
     expect(store.isVolumeGameOpen).toBe(false)
   })
+
+  it('disables music/annoying effects and unlocks all steps when devMode is enabled', () => {
+    const store = useRegistrationStore()
+
+    expect(store.devMode).toBe(false)
+    expect(store.effectiveMusicVolume).toBe(100)
+    expect(store.effectiveSnowEnabled).toBe(true)
+    expect(store.effectiveLightsEnabled).toBe(true)
+    expect(store.goToStep(1)).toBe(false)
+
+    store.setDevMode(true)
+    expect(store.devMode).toBe(true)
+    expect(store.effectiveMusicVolume).toBe(0)
+    expect(store.effectiveSnowEnabled).toBe(false)
+    expect(store.effectiveLightsEnabled).toBe(false)
+    expect(store.canGoNext).toBe(true)
+    expect(store.goToStep(1)).toBe(true)
+    expect(store.currentStepIndex).toBe(1)
+
+    // Turning devMode off restores original musicVolume
+    store.setDevMode(false)
+    expect(store.effectiveMusicVolume).toBe(100)
+  })
 })

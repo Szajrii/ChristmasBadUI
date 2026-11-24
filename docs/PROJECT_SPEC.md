@@ -93,13 +93,14 @@
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
 - `src/utils/lastChristmasAudio.ts` — statyczny syntezator melodii „Last Christmas” w Web Audio API.
-- `src/components/layout/ControlPanel.vue` — panel kontrolny (przełączniki muzyki/śniegu/lampek/ramki, status kroku).
+- `src/components/layout/ControlPanel.vue` — panel kontrolny (przełączniki muzyki/śniegu/lampek/ramki, combobox `Tryb dev: OFF/ON` + pasek szybkiego skakania między krokami w trybie deweloperskim).
 - `src/components/layout/StageContainer.vue` — duży, kwadratowy główny kontener ładujący aktywny krok formularza.
 
 ---
 
 ## 7. Historia zmian
 
+- **2026-11-24 (Tryb deweloperski)**: Dodano combobox `Tryb dev: OFF/ON` (domyślnie wyłączony) w `ControlPanel.vue`; po włączeniu odblokowuje przechodzenie między wszystkimi krokami bez ich zaliczania (`dev-step-select`, `dev-prev-btn`, `dev-next-btn`), wycisza muzykę (`effectiveMusicVolume = 0`) oraz wyłącza śnieg/lampki i przyszłe upierdliwe mechaniki oparte o `store.devMode`.
 - **2026-11-24 (Issue #2)**: Przekształcono widok startowy w Stronę Główną (`Step00Home.vue`) z przyciskami **Logowanie** (otwierającym reużywalny `KitschModal.vue` z komunikatem o braku kont i przyciskiem do rejestracji) oraz **Rejestracja** przenoszącym do pustego `Step01RegistrationPlaceholder.vue`; dodano skille `step-00-home` i `step-01-registration-placeholder` oraz testy.
 
 - **2026-11-24 (Issue #1)**: Dodano głośną muzykę „Last Christmas” na wejściu (`FestiveAudioPlayer`), przycisk regulacji głośności w `ControlPanel.vue` oraz 10-sekundową mini-grę `VolumeBaubleGameModal.vue` z 20 bombkami (1–5%) i resetem do 100% przy ponownym otwarciu; dodano skill `control-volume-bauble-game` oraz testy jednostkowe.

@@ -52,4 +52,25 @@ describe('App.vue', () => {
     expect(wrapper.find('[data-testid="login-modal"]').exists()).toBe(false)
     expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
   })
+
+  it('enables developer mode via combobox, mutes music, and allows jumping steps', async () => {
+    const wrapper = mount(App, {
+      global: {
+        plugins: [createPinia()],
+      },
+    })
+
+    const devSelect = wrapper.find('[data-testid="dev-mode-select"]')
+    expect((devSelect.element as HTMLSelectElement).value).toBe('off')
+    expect(wrapper.find('[data-testid="dev-nav-bar"]').exists()).toBe(false)
+
+    await devSelect.setValue('on')
+
+    expect(wrapper.find('[data-testid="dev-nav-bar"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="volume-control-btn"]').text()).toContain('0% (DEV)')
+
+    // Jump directly to Step 1 without completing Step 0
+    await wrapper.find('[data-testid="dev-next-btn"]').trigger('click')
+    expect(wrapper.find('[data-testid="step-01-placeholder"]').exists()).toBe(true)
+  })
 })

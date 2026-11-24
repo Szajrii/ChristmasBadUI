@@ -42,7 +42,8 @@ Gdy dodajesz nowy krok/widok (np. w ramach kolejnego etapu lub GitHub Issue):
 
 1. Jeśli wymagania są niejasne — najpierw zastosuj skill **`.agents/skills/clarify-and-propose/SKILL.md`**!
 2. Utwórz komponent `src/steps/StepXXNazwa.vue` korzystając z reużywalnych komponentów w `src/components/ui/`.
-3. Po spełnieniu warunku walidacji wywołaj `store.completeStep(stepId, payload)`.
+3. **Obsługa trybu deweloperskiego (`store.devMode`)**: każda nowa irytująca mechanika (np. uciekające przyciski, drgania, timery, losowe przestawianie znaków, dodatkowe dźwięki, przeszkadzający Mikołaj) **musi** sprawdzać `store.devMode` i wyłączać się (lub działać w prosty, nieutrudniający sposób), gdy `store.devMode === true`.
+4. Po spełnieniu warunku walidacji wywołaj `store.completeStep(stepId, payload)`.
 4. Zarejestruj krok w `src/steps/stepRegistry.ts`.
 5. Utwórz **osobny skill dla tego widoku** w `.agents/skills/step-XX-nazwa/SKILL.md` (wzór: `step-00-welcome-placeholder/SKILL.md`) z opisem mechaniki, warunku zaliczenia, użytych komponentów i ewentualnych pułapek.
 6. Dopisz 1–3 proste testy jednostkowe w `src/__tests__/` sprawdzające warunek zaliczenia kroku.
