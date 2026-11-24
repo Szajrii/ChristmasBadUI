@@ -14,6 +14,10 @@ export const useRegistrationStore = defineStore('registration', () => {
     kitschBorderEnabled: true,
   })
 
+  // Głośność muzyki "Last Christmas" (0–100%, startowo 100%)
+  const musicVolume = ref(100)
+  const isVolumeGameOpen = ref(false)
+
   const totalSteps = computed(() => registrationSteps.length)
   const currentStep = computed(() => registrationSteps[currentStepIndex.value])
   const isCurrentStepCompleted = computed(() =>
@@ -66,6 +70,22 @@ export const useRegistrationStore = defineStore('registration', () => {
     settings.value[key] = !settings.value[key]
   }
 
+  function openVolumeGame() {
+    // Ponowne kliknięcie przycisku głośności zawsze resetuje muzykę do 100%
+    musicVolume.value = 100
+    isVolumeGameOpen.value = true
+  }
+
+  function finishVolumeGame(reductionPercent: number, allBaublesClicked: boolean) {
+    if (allBaublesClicked) {
+      musicVolume.value = 0
+    } else {
+      const clampedReduction = Math.max(0, Math.min(100, reductionPercent))
+      musicVolume.value = Math.max(0, 100 - clampedReduction)
+    }
+    isVolumeGameOpen.value = false
+  }
+
   function resetProgress() {
     currentStepIndex.value = 0
     completedStepIds.value = []
@@ -77,6 +97,8 @@ export const useRegistrationStore = defineStore('registration', () => {
     completedStepIds,
     formData,
     settings,
+    musicVolume,
+    isVolumeGameOpen,
     totalSteps,
     currentStep,
     isCurrentStepCompleted,
@@ -89,6 +111,8 @@ export const useRegistrationStore = defineStore('registration', () => {
     goToPreviousStep,
     goToStep,
     toggleSetting,
+    openVolumeGame,
+    finishVolumeGame,
     resetProgress,
   }
 })

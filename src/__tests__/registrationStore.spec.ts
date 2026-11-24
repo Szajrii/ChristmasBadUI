@@ -7,12 +7,14 @@ describe('registrationStore', () => {
     setActivePinia(createPinia())
   })
 
-  it('starts at step 0 with 0% progress and festive effects enabled', () => {
+  it('starts at step 0 with 0% progress, 100% musicVolume, and festive effects enabled', () => {
     const store = useRegistrationStore()
 
     expect(store.currentStepIndex).toBe(0)
     expect(store.progressPercent).toBe(0)
     expect(store.isCurrentStepCompleted).toBe(false)
+    expect(store.musicVolume).toBe(100)
+    expect(store.isVolumeGameOpen).toBe(false)
     expect(store.settings.snowEnabled).toBe(true)
     expect(store.settings.lightsEnabled).toBe(true)
   })
@@ -46,5 +48,27 @@ describe('registrationStore', () => {
     store.resetProgress()
     expect(store.completedStepIds).toEqual([])
     expect(store.formData).toEqual({})
+  })
+
+  it('handles volume mini-game reduction, full mute, and reset to 100% on reopen', () => {
+    const store = useRegistrationStore()
+
+    store.openVolumeGame()
+    expect(store.isVolumeGameOpen).toBe(true)
+    expect(store.musicVolume).toBe(100)
+
+    store.finishVolumeGame(37, false)
+    expect(store.isVolumeGameOpen).toBe(false)
+    expect(store.musicVolume).toBe(63)
+
+    // Reopening resets musicVolume back to 100%
+    store.openVolumeGame()
+    expect(store.musicVolume).toBe(100)
+    expect(store.isVolumeGameOpen).toBe(true)
+
+    // Clicking all baubles sets musicVolume to 0% regardless of raw sum
+    store.finishVolumeGame(45, true)
+    expect(store.musicVolume).toBe(0)
+    expect(store.isVolumeGameOpen).toBe(false)
   })
 })

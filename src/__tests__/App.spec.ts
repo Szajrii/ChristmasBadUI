@@ -16,6 +16,13 @@ describe('App.vue', () => {
     expect(wrapper.find('[data-testid="placeholder-step"]').exists()).toBe(true)
     expect(wrapper.text()).toContain('ChristmasBadUI')
 
+    // Volume control button starts at 100% and opens the bauble mini-game modal
+    const volumeBtn = wrapper.find('[data-testid="volume-control-btn"]')
+    expect(volumeBtn.text()).toContain('100%')
+    expect(wrapper.find('[data-testid="volume-game-modal"]').exists()).toBe(false)
+    await volumeBtn.trigger('click')
+    expect(wrapper.find('[data-testid="volume-game-modal"]').exists()).toBe(true)
+
     // Toggle snow button in control panel
     const snowBtn = wrapper.find('[data-testid="toggle-snow-btn"]')
     expect(snowBtn.text()).toContain('ON')

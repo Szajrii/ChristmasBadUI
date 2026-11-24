@@ -29,8 +29,17 @@ const store = useRegistrationStore()
         </div>
       </div>
 
-      <!-- Control options (tu będziemy dodawać kolejne opcje kontrolne) -->
+      <!-- Control options -->
       <nav aria-label="Panel kontrolny" class="flex flex-wrap items-center gap-2">
+        <KitschButton
+          data-testid="volume-control-btn"
+          variant="grinch"
+          :active="store.isVolumeGameOpen"
+          @click="store.openVolumeGame()"
+        >
+          {{ store.musicVolume === 0 ? '🔇' : '🔊' }} Muzyka: {{ store.musicVolume }}%
+        </KitschButton>
+
         <KitschButton
           data-testid="toggle-snow-btn"
           variant="elf"
@@ -57,12 +66,6 @@ const store = useRegistrationStore()
         >
           🍬 Ramka: {{ store.settings.kitschBorderEnabled ? 'KICZ' : 'ZŁOTO' }}
         </KitschButton>
-
-        <span
-          class="hidden rounded-lg border border-dashed border-yellow-300/60 bg-black/25 px-2.5 py-1.5 text-xs text-yellow-200/90 md:inline-block"
-        >
-          🎄 Miejsce na przyszłe kontrolki
-        </span>
       </nav>
     </div>
   </header>
