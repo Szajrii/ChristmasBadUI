@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-santa-red: #d90429;
+  --color-santa-dark: #8d0801;
+  --color-pine-green: #0b6e4f;
+  --color-neon-green: #38b000;
+  --color-tinsel-gold: #ffd700;
+  --color-snow-cream: #fffdf5;
+  --color-frost-blue: #caf0f8;
+  --font-kitsch: "Comic Sans MS", "Chalkboard SE", "Marker Felt", cursive, sans-serif;
+}
+
+body {
+  font-family: var(--font-kitsch);
+  background: radial-gradient(circle at top, #1b4332 0%, #081c15 55%, #370617 100%);
+  color: var(--color-snow-cream);
+}
+
+/* Candy-cane striped border utility */
+.candy-cane-border {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #d90429 0px,
+    #d90429 14px,
+    #ffffff 14px,
+    #ffffff 28px,
+    #0b6e4f 28px,
+    #0b6e4f 42px,
+    #ffd700 42px,
+    #ffd700 48px
+  );
+}
+
+/* Tacky gold shimmer text */
+.kitsch-text-shadow {
+  text-shadow:
+    2px 2px 0 #8d0801,
+    -1px -1px 0 #ffd700,
+    0 0 12px rgba(255, 215, 0, 0.75);
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(50vh) translateX(18px) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) translateX(-12px) rotate(360deg);
+    opacity: 0.4;
+  }
+}
+
+.snowflake {
+  position: fixed;
+  top: -10vh;
+  pointer-events: none;
+  user-select: none;
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bulb-blink {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1.3);
+    transform: scale(1.08);
+  }
+  50% {
+    opacity: 0.45;
+    filter: brightness(0.75);
+    transform: scale(0.94);
+  }
+}
+
+.christmas-bulb {
+  animation: bulb-blink 1.2s ease-in-out infinite;
+}

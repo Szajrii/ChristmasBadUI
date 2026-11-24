@@ -1,0 +1,70 @@
+name: Gemini Agent Task Runner
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  gemini-agent:
+    # Uruchamia się tylko, gdy:
+    # 1) Issue otrzyma etykietę "gemini-task" od uprawnionego użytkownika, LUB
+    # 2) Uprawniony użytkownik napisze komentarz zaczynający się od "@gemini-cli"
+    if: >-
+      (github.event_name == 'issues' &&
+        github.event.label.name == 'gemini-task' &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.issue.author_association)) ||
+      (github.event_name == 'issue_comment' &&
+        startsWith(github.event.comment.body, '@gemini-cli') &&
+        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Gemini CLI Agent
+        uses: google-github-actions/run-gemini-cli@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: |
+            Jesteś autonomicznym agentem pracującym nad repozytorium ChristmasBadUI (menedżer pakietów: pnpm).
+            1. Najpierw przeczytaj AGENTS.md, WSZYSTKIE pliki SKILL.md w katalogu .agents/skills/ oraz docs/PROJECT_SPEC.md.
+            2. Przeanalizuj GitHub Issue #${{ github.event.issue.number }}:
+               Tytuł: ${{ github.event.issue.title }}
+               Opis: ${{ github.event.issue.body }}
+               Dodatkowy komentarz (jeśli istnieje): ${{ github.event.comment.body }}
+            3. Jeśli zadanie jest niejasne lub brakuje kluczowych decyzji, zastosuj skill .agents/skills/clarify-and-propose/SKILL.md:
+               dodaj komentarz pod Issue z krótką listą pytań i własnymi propozycjami rozwiązań (Opcja A/B/C) i poczekaj na odpowiedź użytkownika zamiast zgadywać.
+            4. Jeśli wymagania są jasne (lub użytkownik dał wolną rękę):
+               - Zbuduj rozwiązanie modularnie (reużywalne komponenty w src/components/ui/, kroki w src/steps/ zarejestrowane w stepRegistry.ts).
+               - Utwórz lub zaktualizuj osobny skill dla tego widoku w .agents/skills/step-XX-<nazwa>/SKILL.md.
+               - Dodaj proste testy jednostkowe w src/__tests__/ i zaktualizuj docs/PROJECT_SPEC.md.
+               - Uruchom wyłącznie przez pnpm: `pnpm test` oraz `pnpm run build` i upewnij się, że oba przechodzą bez błędów.
+               - Utwórz nową gałąź `gemini/issue-${{ github.event.issue.number }}`, zacommituj zmiany, wypchnij ją i utwórz Pull Request (używając `gh pr create`), a następnie dodaj komentarz w Issue z podsumowaniem i linkiem do PR.
