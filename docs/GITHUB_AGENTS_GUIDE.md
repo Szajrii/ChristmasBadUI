@@ -40,12 +40,13 @@ Dzięki oficjalnej akcji **`google-github-actions/run-gemini-cli`** możesz trak
 3. Nazwa: `GEMINI_API_KEY`
 4. Wartość: wklej swój klucz z Google AI Studio i zapisz.
 
-### Krok 3: Włącz uprawnienia dla GitHub Actions do tworzenia PR
+### Krok 3: Włącz uprawnienia dla GitHub Actions (tworzenie PR i akcje Google)
 1. Przejdź do **Settings** → **Actions** → **General**.
-2. Zjedź na dół do sekcji **Workflow permissions**.
-3. Wybierz **Read and write permissions**.
-4. Zaznacz checkbox **Allow GitHub Actions to create and approve pull requests**.
-5. Kliknij **Save**.
+2. W sekcji **Actions permissions** wybierz **Allow all actions and reusable workflows** (lub w *Allow specified actions* dodaj `google-github-actions/*`), aby GitHub zezwolił na uruchomienie `google-github-actions/run-gemini-cli`.
+3. Zjedź na dół do sekcji **Workflow permissions**.
+4. Wybierz **Read and write permissions**.
+5. Zaznacz checkbox **Allow GitHub Actions to create and approve pull requests**.
+6. Kliknij **Save**.
 
 ### Krok 4: Utwórz etykietę (Label) dla zadań agenta
 1. Przejdź do zakładki **Issues** → **Labels**.
