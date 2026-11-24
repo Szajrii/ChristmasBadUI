@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { useRegistrationStore } from '../stores/registrationStore'
-import { evaluateEmailRules } from '../utils/emailValidation'
+import { evaluateEmailRules, type EmailRuleResult } from '../utils/emailValidation'
 import KitschButton from '../components/ui/KitschButton.vue'
 
 const store = useRegistrationStore()
 const email = ref((store.formData.email as string | undefined) ?? '')
-
-const rules = computed(() => evaluateEmailRules(email.value))
-const passedCount = computed(() => rules.value.filter((r) => r.passed).length)
-const allValid = computed(() => passedCount.value === rules.value.length)
+const currentError = ref<EmailRuleResult | null>(null)
 
 function submitEmail() {
-  if (!allValid.value) return
+  const rules = evaluateEmailRules(email.value)
+  const firstFailing = rules.find((rule) => !rule.passed) ?? null
+
+  if (firstFailing) {
+    currentError.value = firstFailing
+    return
+  }
+
+  currentError.value = null
   store.completeStep('step-02-email', { email: email.value })
   store.goToNextStep()
 }
@@ -21,12 +26,12 @@ function submitEmail() {
 <template>
   <form
     data-testid="step-02-email"
-    class="flex w-full max-w-md flex-col gap-3 text-left"
+    class="flex w-full max-w-md flex-col gap-4 text-left"
     @submit.prevent="submitEmail"
   >
     <div>
-      <label for="festive-email" class="mb-1 block text-xs font-bold text-yellow-300">
-        📧 Podaj swój świąteczny adres e-mail:
+      <label for="festive-email" class="mb-1.5 block text-xs font-bold text-yellow-300">
+        📧 Podaj swój adres e-mail:
       </label>
       <input
         id="festive-email"
@@ -34,44 +39,26 @@ function submitEmail() {
         v-model="email"
         type="text"
         autocomplete="off"
-        placeholder="np. rudolf_XXIV_狗_🎄..."
-        class="w-full rounded-xl border-2 border-yellow-300/80 bg-emerald-950/90 px-3 py-2 text-xs font-bold text-yellow-100 outline-none focus:border-yellow-300 sm:text-sm"
+        placeholder="np. mikolaj@biegun.pl"
+        class="w-full rounded-xl border-2 border-yellow-300/80 bg-emerald-950/90 px-3 py-2.5 text-sm font-bold text-yellow-100 outline-none focus:border-yellow-300"
       />
     </div>
 
-    <div class="rounded-2xl border-2 border-red-400/60 bg-black/40 p-2.5">
-      <div class="mb-1.5 flex items-center justify-between text-xs font-extrabold">
-        <span class="text-yellow-300">📜 Lista wymagań Mikołaja:</span>
-        <span data-testid="email-rules-progress" class="text-emerald-300">
-          {{ passedCount }} / {{ rules.length }}
-        </span>
-      </div>
-
-      <ul class="max-h-44 space-y-1 overflow-y-auto pr-1 text-[11px] leading-snug">
-        <li
-          v-for="rule in rules"
-          :key="rule.id"
-          :data-testid="`email-rule-${rule.id}`"
-          class="flex items-start gap-1.5 rounded-lg px-1.5 py-0.5"
-          :class="
-            rule.passed
-              ? 'bg-emerald-900/50 text-lime-200'
-              : 'bg-red-950/60 text-red-200'
-          "
-        >
-          <span aria-hidden="true">{{ rule.passed ? '✅' : '❌' }}</span>
-          <span>{{ rule.label }}</span>
-        </li>
-      </ul>
+    <div
+      v-if="currentError"
+      data-testid="email-first-error"
+      role="alert"
+      class="rounded-2xl border-2 border-red-400 bg-red-950/80 p-3 text-xs font-bold text-red-100 shadow-[0_0_16px_rgba(239,68,68,0.45)] sm:text-sm"
+    >
+      ❌ {{ currentError.label }}
     </div>
 
     <KitschButton
       data-testid="step-02-submit-btn"
       type="submit"
       variant="gold"
-      :disabled="!allValid"
     >
-      {{ allValid ? '✅ Zapisz e-mail i idź dalej ➡️' : `🔒 Spełnij wszystkie reguły (${passedCount}/${rules.length})` }}
+      ✅ Zatwierdź e-mail ➡️
     </KitschButton>
   </form>
 </template>

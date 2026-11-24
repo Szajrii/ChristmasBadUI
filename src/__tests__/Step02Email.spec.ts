@@ -22,26 +22,32 @@ describe('Step02Email.vue', () => {
     expect(isEmailValid(VALID_FESTIVE_EMAIL)).toBe(true)
   })
 
-  it('keeps submit disabled until all rules pass, then saves email and advances to Step 3', async () => {
+  it('hides rules initially and reveals only the first failing rule on each submit click', async () => {
     const store = useRegistrationStore()
     store.completeStep('home')
     store.completeStep('step-01-credentials')
     store.goToStep(2)
 
     const wrapper = mount(Step02Email)
-    const submitBtn = wrapper.find('[data-testid="step-02-submit-btn"]')
-    expect(submitBtn.attributes('disabled')).toBeDefined()
+    expect(wrapper.find('[data-testid="email-first-error"]').exists()).toBe(false)
 
     const input = wrapper.find('[data-testid="email-input"]')
+
+    // 1. Submit invalid format -> shows format error only
+    await input.setValue('zly-mail')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.find('[data-testid="email-first-error"]').text()).toContain('Poprawny format')
+
+    // 2. Fix format, submit short email -> reveals 50-char requirement
     await input.setValue('test@gmail.pl')
-    expect(submitBtn.attributes('disabled')).toBeDefined()
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.find('[data-testid="email-first-error"]').text()).toContain('Minimum 50 znaków')
 
+    // 3. Submit valid email -> clears error, saves to Pinia, advances to Step 3
     await input.setValue(VALID_FESTIVE_EMAIL)
-    expect(wrapper.find('[data-testid="email-rules-progress"]').text()).toBe('9 / 9')
-    expect(submitBtn.attributes('disabled')).toBeUndefined()
-
     await wrapper.find('form').trigger('submit')
 
+    expect(wrapper.find('[data-testid="email-first-error"]').exists()).toBe(false)
     expect(store.formData.email).toBe(VALID_FESTIVE_EMAIL)
     expect(store.completedStepIds).toContain('step-02-email')
     expect(store.currentStepIndex).toBe(3)

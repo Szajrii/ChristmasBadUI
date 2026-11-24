@@ -11,6 +11,10 @@ description: Specyfikacja Kroku 2 rejestracji (Step02Email) — adres e-mail z 9
 - **Komponent**: `src/steps/Step02Email.vue`
 - **Logika walidacji**: `src/utils/emailValidation.ts` (`evaluateEmailRules`, `isEmailValid`)
 
+## Opis UX (ukryta lista wymagań)
+- Formularz **nie pokazuje** z góry listy reguł ani ich łącznej liczby.
+- Dopiero po kliknięciu przycisku zatwierdzenia (`data-testid="step-02-submit-btn"`) sprawdzana jest walidacja i wyświetlany jest **wyłącznie pierwszy niespełniony warunek** (`data-testid="email-first-error"`).
+
 ## Reguły walidacji (wszystkie 9 muszą być spełnione)
 1. Poprawny format e-maila (`local@domain.xx`, bez spacji).
 2. Minimum 50 znaków.

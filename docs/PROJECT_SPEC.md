@@ -107,7 +107,7 @@
 
 ## 7. Historia zmian
 
-- **2026-11-24 (Krok 2: E-mail)**: Zaimplementowano `Step02Email.vue` oraz `emailValidation.ts` z 9 irytującymi regułami walidacji (format, >=50 znaków, chiński pies `狗`, >=3 cyfry o sumie 14, emotka, imię renifera, `XXIV`, zakaz małej litery `e`, domena `.pl`/`.ho`/`.xmas`) oraz tymczasowy `Step03Placeholder.vue`.
+- **2026-11-24 (Krok 2: E-mail)**: Zaimplementowano `Step02Email.vue` oraz `emailValidation.ts` z 9 irytującymi regułami walidacji (format, >=50 znaków, chiński pies `狗`, >=3 cyfry o sumie 14, emotka, imię renifera, `XXIV`, zakaz małej litery `e`, domena `.pl`/`.ho`/`.xmas`) — reguły są ukryte i po kliknięciu przycisku pokazuje się tylko pierwszy niespełniony warunek — oraz tymczasowy `Step03Placeholder.vue`.
 
 - **2026-11-24 (Krok 1 + Vue Router)**: Dodano `vue-router` (`createWebHashHistory` + strażnik kroków w `src/router/index.ts`) oraz zaimplementowano `Step01Credentials.vue` (username z 3-bębnowego jednorękiego bandyty + pojedyncze pole hasła wpisywanego wspak z efektem świeczki na kursorze, zapis w Pinia, respektowanie `devMode`) oraz tymczasowy `Step02Placeholder.vue`.
 - **2026-11-24 (Tryb deweloperski — korekta)**: Zawężono `devMode` wyłącznie do wyciszenia muzyki (`effectiveMusicVolume = 0`) i odblokowania przechodzenia między krokami (`dev-step-select`, `dev-prev-btn`, `dev-next-btn`), zachowując wszystkie animacje, śnieg, lampki i efekt świeczki aktywne do testów.
