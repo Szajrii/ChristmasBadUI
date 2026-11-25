@@ -73,7 +73,8 @@
 | 2 | `step-02-email` | Krok 2: Świąteczny E-mail | `src/steps/Step02Email.vue` | `.agents/skills/step-02-email/SKILL.md` | Zaimplementowany |
 | 3 | `step-03-interests` | Krok 3: Zainteresowania | `src/steps/Step03Interests.vue` | `.agents/skills/step-03-interests/SKILL.md` | Zaimplementowany |
 | 4 | `step-04-memory` | Krok 4: Świąteczne Memory | `src/steps/Step04Memory.vue` | `.agents/skills/step-04-memory/SKILL.md` | Zaimplementowany |
-| 5 | `step-05-placeholder` | Krok 5: Wkrótce (Placeholder) | `src/steps/Step05Placeholder.vue` | `.agents/skills/step-05-placeholder/SKILL.md` | Tymczasowy |
+| 5 | `step-05-birthdate` | Krok 5: Data urodzenia | `src/steps/Step05Birthdate.vue` | `.agents/skills/step-05-birthdate/SKILL.md` | Zaimplementowany (Issue #3) |
+| 6 | `step-06-placeholder` | Krok 6: Wkrótce (Placeholder) | `src/steps/Step06Placeholder.vue` | `.agents/skills/step-06-placeholder/SKILL.md` | Tymczasowy |
 
 ---
 
@@ -88,7 +89,8 @@
 | `step-02-email` | `.agents/skills/step-02-email/SKILL.md` | Krok 2: e-mail z 9 absurdalnymi regułami (50+ znaków, 狗, suma cyfr 14, emotka, renifer, XXIV, brak małego e, TLD) |
 | `step-03-interests` | `.agents/skills/step-03-interests/SKILL.md` | Krok 3: 30 checkboxów w 3 kolumnach z ukrytą pułapką „Wyczyść wszystko” |
 | `step-04-memory` | `.agents/skills/step-04-memory/SKILL.md` | Krok 4: świąteczna gra Memory (4 pary kart) |
-| `step-05-placeholder` | `.agents/skills/step-05-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 5 rejestracji |
+| `step-05-birthdate` | `.agents/skills/step-05-birthdate/SKILL.md` | Krok 5: data urodzenia — katapulta sań dla roku + tasujące się przyciski +1/-1 dla miesiąca i dnia |
+| `step-06-placeholder` | `.agents/skills/step-06-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 6 rejestracji |
 | `control-volume-bauble-game` | `.agents/skills/control-volume-bauble-game/SKILL.md` | Głośna muzyka „Last Christmas” na starcie oraz 10s mini-gra z 20 bombkami wyciszającymi dźwięk |
 
 ---
@@ -99,12 +101,14 @@
 - `src/components/ui/KitschCard.vue` — ramka w stylu laski cukrowej / kiczowatej kartki świątecznej.
 - `src/components/ui/KitschModal.vue` — reużywalne okno dialogowe oparte na `KitschCard`.
 - `src/components/ui/SlotMachineUsername.vue` — retro skrzynka jednorękiego bandyty z mechaniczną dźwignią i pojedynczym okienkiem bębna losującym 1 `username`.
+- `src/components/ui/SleighCatapult.vue` — katapulta sań ładująca siłę rzutu (0–100% ping-pong) do wyboru roku urodzenia.
 - `src/components/ui/ChristmasLights.vue` — pasek migających lampek choinkowych.
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
 - `src/utils/lastChristmasAudio.ts` — statyczny syntezator melodii „Last Christmas” w Web Audio API.
 - `src/utils/emailValidation.ts` — zestaw 9 absurdalnych reguł walidacji adresu e-mail dla Kroku 2.
 - `src/utils/memoryGame.ts` — generator przetasowanej talii kart dla gry Memory w Kroku 4.
+- `src/utils/birthdateCatapult.ts` — logika mapowania siły katapulty na rok oraz obsługa dni w miesiącu i lat przestępnych dla Kroku 5.
 - `src/components/layout/ControlPanel.vue` — panel kontrolny (przełączniki muzyki/śniegu/lampek/ramki, combobox `Tryb dev: OFF/ON` + pasek szybkiego skakania między krokami w trybie deweloperskim).
 - `src/components/layout/StageContainer.vue` — duży, kwadratowy główny kontener ładujący aktywny krok formularza.
 
@@ -112,6 +116,7 @@
 
 ## 7. Historia zmian
 
+- **2026-11-25 (Issue #3 — Krok 5: Data urodzenia)**: Zaimplementowano `Step05Birthdate.vue`, reużywalny komponent `SleighCatapult.vue` oraz `birthdateCatapult.ts` (katapulta sań dla roku 1900–2026 + przyciski `+1`/`-1` dla miesiąca i dnia zamieniające się miejscami co 3 kliknięcia, zapis w `store.formData`) oraz tymczasowy `Step06Placeholder.vue`.
 - **2026-11-25 (Retro kiczowaty redesign UI)**: Przebudowano wygląd na prostszy, mniej nowoczesny styl lat 90./2000. (`src/style.css`, `KitschButton.vue`, `KitschCard.vue`, `KitschModal.vue`, `ControlPanel.vue`, `StageContainer.vue`) — kanciaste ramki 3D `outset`/`double`, jaskrawe kolory świąteczne, kropkowane tło, brak rozmycia `backdrop-blur` oraz przewijany pasek `marquee` u góry strony.
 - **2026-11-24 (Krok 4: Świąteczne Memory)**: Zaimplementowano `Step04Memory.vue` oraz `memoryGame.ts` (4 pary świątecznych symboli; nietrafione karty zakrywają się ponownie bez resetowania dopasowanych par + po 5s dialog z fałszywą opcją wykupienia skipu 1/2/3 kroków za $2/$3/$5) oraz tymczasowy `Step05Placeholder.vue`.
 

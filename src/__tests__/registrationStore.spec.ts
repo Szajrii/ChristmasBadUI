@@ -25,7 +25,7 @@ describe('registrationStore', () => {
     store.completeStep('home', { entryChoice: 'register' })
 
     expect(store.isCurrentStepCompleted).toBe(true)
-    expect(store.progressPercent).toBe(17)
+    expect(store.progressPercent).toBe(Math.round((1 / store.totalSteps) * 100))
     expect(store.formData.entryChoice).toBe('register')
     expect(store.goToNextStep()).toBe(true)
     expect(store.currentStepIndex).toBe(1)

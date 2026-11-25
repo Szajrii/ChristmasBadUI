@@ -41,9 +41,16 @@ export const registrationSteps: RegistrationStepDefinition[] = [
     icon: '🃏',
   },
   {
-    id: 'step-05-placeholder',
+    id: 'step-05-birthdate',
     path: '/krok-5',
-    title: 'Krok 5: Wkrótce',
+    title: 'Krok 5: Data urodzenia',
+    subtitle: 'Wystrzel sanie w przeszłość po swój rok i opanuj uciekające +1/-1!',
+    icon: '🛷',
+  },
+  {
+    id: 'step-06-placeholder',
+    path: '/krok-6',
+    title: 'Krok 6: Wkrótce',
     subtitle: 'Kolejne okno rejestracyjne (w budowie!)',
     icon: '🦌',
   },

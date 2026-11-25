@@ -7,7 +7,8 @@ import Step01Credentials from '../steps/Step01Credentials.vue'
 import Step02Email from '../steps/Step02Email.vue'
 import Step03Interests from '../steps/Step03Interests.vue'
 import Step04Memory from '../steps/Step04Memory.vue'
-import Step05Placeholder from '../steps/Step05Placeholder.vue'
+import Step05Birthdate from '../steps/Step05Birthdate.vue'
+import Step06Placeholder from '../steps/Step06Placeholder.vue'
 
 const stepComponents: Record<string, Component> = {
   home: Step00Home,
@@ -15,7 +16,8 @@ const stepComponents: Record<string, Component> = {
   'step-02-email': Step02Email,
   'step-03-interests': Step03Interests,
   'step-04-memory': Step04Memory,
-  'step-05-placeholder': Step05Placeholder,
+  'step-05-birthdate': Step05Birthdate,
+  'step-06-placeholder': Step06Placeholder,
 }
 
 export function createAppRouter(history?: RouterHistory) {
