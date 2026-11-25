@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRegistrationStore } from '../stores/registrationStore'
 import KitschButton from '../components/ui/KitschButton.vue'
 import KitschModal from '../components/ui/KitschModal.vue'
+import FlyingReindeersOverlay from '../components/ui/FlyingReindeersOverlay.vue'
 
 const store = useRegistrationStore()
 const isLoginModalOpen = ref(false)
@@ -18,6 +19,7 @@ function startRegistration(viaLoginModal = false) {
 
 <template>
   <div data-testid="home-step" class="flex max-w-md flex-col items-center gap-5 text-center">
+    <FlyingReindeersOverlay />
     <div class="text-5xl" aria-hidden="true">🎄🎅🎁</div>
 
     <h3 class="text-xl font-extrabold text-yellow-300 sm:text-2xl">

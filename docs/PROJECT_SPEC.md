@@ -119,6 +119,7 @@
 - `src/components/ui/SantaErrorModal.vue` — niezamykalny modal błędu serwera z twarzą Mikołaja (SVG), dymkiem „Hoł Hoł Hoł...” i przyciskiem resetu.
 - `src/components/ui/ChristmasLights.vue` — pasek migających lampek choinkowych.
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
+- `src/components/ui/FlyingReindeersOverlay.vue` — warstwa ciągle przelatujących zaprzęgów reniferów na stronie głównej.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
 - `src/utils/lastChristmasAudio.ts` — statyczny syntezator melodii „Last Christmas” w Web Audio API.
 - `src/utils/emailValidation.ts` — zestaw 9 absurdalnych reguł walidacji adresu e-mail dla Kroku 2.
@@ -132,6 +133,7 @@
 
 ## 7. Historia zmian
 
+- **2026-11-25 (Przelatujące renifery na stronie głównej)**: Dodano `FlyingReindeersOverlay.vue` do `Step00Home.vue` (ciągle przelatujące zaprzęgi reniferów w lewo i w prawo nad stroną główną).
 - **2026-11-25 (Issues #4–#10 — Aktualizacja Kroku 3 oraz Kroki 6–11)**: Zredukowano listę zainteresowań w `Step03Interests` do 21 opcji (Issue #4) oraz zaimplementowano komplet pozostałych kroków: `Step06Phone` z `RotaryPhoneDial` (Issue #5), `Step07Country` z `ThanosSkipModal` (Issue #6), `Step08Captcha` z `captchaGame.ts` (Issue #7), `Step09Terms` z `ParabolicCheckbox` (Issue #8), `Step10GrinchCheck` z `HoldToConfirmButton` (Issue #9) i finałowy `Step11Certificate` z `SantaErrorModal` resetującym rejestrację (Issue #10).
 - **2026-11-25 (Issue #3 — Krok 5: Data urodzenia)**: Zaimplementowano `Step05Birthdate.vue`, reużywalny komponent `SleighCatapult.vue` oraz `birthdateCatapult.ts` (katapulta sań dla roku 1900–2026 + przyciski `+1`/`-1` dla miesiąca i dnia zamieniające się miejscami co 3 kliknięcia, zapis w `store.formData`) oraz tymczasowy `Step06Placeholder.vue`.
 - **2026-11-25 (Retro kiczowaty redesign UI)**: Przebudowano wygląd na prostszy, mniej nowoczesny styl lat 90./2000. (`src/style.css`, `KitschButton.vue`, `KitschCard.vue`, `KitschModal.vue`, `ControlPanel.vue`, `StageContainer.vue`) — kanciaste ramki 3D `outset`/`double`, jaskrawe kolory świąteczne, kropkowane tło, brak rozmycia `backdrop-blur` oraz przewijany pasek `marquee` u góry strony.

@@ -28,6 +28,8 @@ describe('App.vue', () => {
     expect(wrapper.find('[data-testid="control-panel"]').exists()).toBe(true)
     expect(wrapper.find('[data-testid="stage-container"]').exists()).toBe(true)
     expect(wrapper.find('[data-testid="home-step"]').exists()).toBe(true)
+    expect(wrapper.find('[data-testid="flying-reindeers-overlay"]').exists()).toBe(true)
+    expect(wrapper.findAll('[data-testid="flying-reindeer-item"]').length).toBeGreaterThan(0)
     expect(wrapper.text()).toContain('ChristmasBadUI')
 
     // Volume control button starts at 100% and opens the bauble mini-game modal

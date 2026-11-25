@@ -13,6 +13,7 @@ description: Specyfikacja strony głównej Step00Home (Issue #2) z przyciskami L
 
 ## Opis działania i UI
 - Wyświetla się jako pierwszy widok wewnątrz `StageContainer.vue`.
+- W tle po całym ekranie stale przelatują zaprzęgi reniferów (`FlyingReindeersOverlay.vue`, `pointer-events-none`, bez blokowania interakcji).
 - Zawiera dwa główne przyciski `KitschButton`:
   1. **`🔐 Logowanie`** (`data-testid="home-login-btn"`) — otwiera okno dialogowe `KitschModal` (`data-testid="login-modal"`) z kiczowatym komunikatem, że *„przecież tu nikt jeszcze nie ma konta”*, oraz przyciskiem `🎁 Przejdź do rejestracji` (`data-testid="login-modal-register-btn"`).
   2. **`📝 Rejestracja`** (`data-testid="home-register-btn"`) — bezpośrednio zalicza krok `home` (`entryChoice: 'register'`) i przenosi do kroku 1 (`goToNextStep()`).
@@ -21,6 +22,7 @@ description: Specyfikacja strony głównej Step00Home (Issue #2) z przyciskami L
 - Kliknięcie przycisku **Rejestracja** na stronie głównej lub przycisku **Przejdź do rejestracji** w oknie dialogowym logowania.
 
 ## Użyte reużywalne komponenty
+- `src/components/ui/FlyingReindeersOverlay.vue`
 - `src/components/ui/KitschButton.vue`
 - `src/components/ui/KitschModal.vue`
 - `src/stores/registrationStore.ts`
