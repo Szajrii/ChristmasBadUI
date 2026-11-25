@@ -18,9 +18,9 @@ withDefaults(
     role="dialog"
     aria-modal="true"
     :aria-labelledby="titleId"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+    class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/80 p-4"
   >
-    <KitschCard class="w-full" :class="maxWidthClass">
+    <KitschCard class="my-auto w-full" :class="maxWidthClass">
       <slot />
     </KitschCard>
   </div>

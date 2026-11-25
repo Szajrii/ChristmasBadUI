@@ -114,7 +114,7 @@ function onDevStepChange(event: Event) {
           🛠️ TRYB DEWELOPERSKI AKTYWNY — muzyka wyciszona, wszystkie kroki odblokowane (animacje i efekty działają)
         </span>
 
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
           <KitschButton
             data-testid="dev-prev-btn"
             variant="elf"
@@ -128,7 +128,7 @@ function onDevStepChange(event: Event) {
             data-testid="dev-step-select"
             aria-label="Skocz do kroku"
             :value="store.currentStepIndex"
-            class="rounded-xl border-2 border-lime-400 bg-emerald-950 px-2.5 py-1.5 text-xs font-bold text-lime-100 outline-none"
+            class="max-w-full rounded-xl border-2 border-lime-400 bg-emerald-950 px-2.5 py-1.5 text-xs font-bold text-lime-100 outline-none"
             @change="onDevStepChange"
           >
             <option

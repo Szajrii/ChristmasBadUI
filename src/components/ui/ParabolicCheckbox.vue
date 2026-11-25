@@ -131,7 +131,7 @@ const moverStyle = computed(() => ({
 <template>
   <div
     data-testid="parabolic-checkbox-root"
-    class="retro-bevel relative flex min-h-[115px] w-full flex-col items-center justify-center overflow-hidden border-[#ffff00] bg-[#003300] p-3"
+    class="retro-bevel relative flex min-h-[145px] w-full flex-col items-center justify-end overflow-visible border-[#ffff00] bg-[#003300] p-3"
   >
     <div
       :key="launchKey"

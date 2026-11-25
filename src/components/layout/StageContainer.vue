@@ -14,12 +14,12 @@ const store = useRegistrationStore()
     <KitschCard
       data-testid="stage-container"
       :striped-border="store.settings.kitschBorderEnabled"
-      class="aspect-square w-full max-w-[780px]"
+      class="w-full max-w-[820px] min-h-[600px] sm:min-h-[700px]"
     >
-      <div class="flex h-full flex-col justify-between bg-[#005500]/60 p-5 sm:p-7">
+      <div class="flex min-h-[580px] flex-col justify-between bg-[#005500]/60 p-4 sm:min-h-[680px] sm:p-7">
         <!-- Step header -->
         <div class="border-b-4 border-double border-[#ffff00] pb-3 text-center">
-          <div class="mb-1 flex items-center justify-center gap-2 text-2xl sm:text-3xl">
+          <div class="mb-1 flex items-center justify-center gap-2 text-xl sm:text-3xl">
             <span aria-hidden="true">{{ store.currentStep?.icon ?? '🎄' }}</span>
             <h2 class="kitsch-text-shadow font-extrabold text-[#ffff00]">
               {{ store.currentStep?.title ?? 'Ładowanie świątecznego chaosu...' }}
@@ -32,7 +32,7 @@ const store = useRegistrationStore()
         </div>
 
         <!-- Dynamic step content slot -->
-        <div class="my-4 flex flex-1 flex-col items-center justify-center overflow-y-auto px-2">
+        <div class="my-4 flex flex-1 flex-col items-center justify-center px-1 sm:px-2">
           <slot />
         </div>
 
