@@ -8,7 +8,12 @@ import Step02Email from '../steps/Step02Email.vue'
 import Step03Interests from '../steps/Step03Interests.vue'
 import Step04Memory from '../steps/Step04Memory.vue'
 import Step05Birthdate from '../steps/Step05Birthdate.vue'
-import Step06Placeholder from '../steps/Step06Placeholder.vue'
+import Step06Phone from '../steps/Step06Phone.vue'
+import Step07Country from '../steps/Step07Country.vue'
+import Step08Captcha from '../steps/Step08Captcha.vue'
+import Step09Terms from '../steps/Step09Terms.vue'
+import Step10GrinchCheck from '../steps/Step10GrinchCheck.vue'
+import Step11Certificate from '../steps/Step11Certificate.vue'
 
 const stepComponents: Record<string, Component> = {
   home: Step00Home,
@@ -17,7 +22,12 @@ const stepComponents: Record<string, Component> = {
   'step-03-interests': Step03Interests,
   'step-04-memory': Step04Memory,
   'step-05-birthdate': Step05Birthdate,
-  'step-06-placeholder': Step06Placeholder,
+  'step-06-phone': Step06Phone,
+  'step-07-country': Step07Country,
+  'step-08-captcha': Step08Captcha,
+  'step-09-terms': Step09Terms,
+  'step-10-grinch': Step10GrinchCheck,
+  'step-11-certificate': Step11Certificate,
 }
 
 export function createAppRouter(history?: RouterHistory) {

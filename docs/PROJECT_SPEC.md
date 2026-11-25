@@ -71,10 +71,15 @@
 | 0 | `home` | Świąteczna Strona Główna | `src/steps/Step00Home.vue` | `.agents/skills/step-00-home/SKILL.md` | Zaimplementowany (Issue #2) |
 | 1 | `step-01-credentials` | Krok 1: Login i Hasło | `src/steps/Step01Credentials.vue` | `.agents/skills/step-01-credentials/SKILL.md` | Zaimplementowany |
 | 2 | `step-02-email` | Krok 2: Świąteczny E-mail | `src/steps/Step02Email.vue` | `.agents/skills/step-02-email/SKILL.md` | Zaimplementowany |
-| 3 | `step-03-interests` | Krok 3: Zainteresowania | `src/steps/Step03Interests.vue` | `.agents/skills/step-03-interests/SKILL.md` | Zaimplementowany |
+| 3 | `step-03-interests` | Krok 3: Zainteresowania | `src/steps/Step03Interests.vue` | `.agents/skills/step-03-interests/SKILL.md` | Zaimplementowany (zredukowano do 21 opcji — Issue #4) |
 | 4 | `step-04-memory` | Krok 4: Świąteczne Memory | `src/steps/Step04Memory.vue` | `.agents/skills/step-04-memory/SKILL.md` | Zaimplementowany |
 | 5 | `step-05-birthdate` | Krok 5: Data urodzenia | `src/steps/Step05Birthdate.vue` | `.agents/skills/step-05-birthdate/SKILL.md` | Zaimplementowany (Issue #3) |
-| 6 | `step-06-placeholder` | Krok 6: Wkrótce (Placeholder) | `src/steps/Step06Placeholder.vue` | `.agents/skills/step-06-placeholder/SKILL.md` | Tymczasowy |
+| 6 | `step-06-phone` | Krok 6: Numer telefonu | `src/steps/Step06Phone.vue` | `.agents/skills/step-06-phone/SKILL.md` | Zaimplementowany (Issue #5) |
+| 7 | `step-07-country` | Krok 7: Kraj zamieszkania | `src/steps/Step07Country.vue` | `.agents/skills/step-07-country/SKILL.md` | Zaimplementowany (Issue #6) |
+| 8 | `step-08-captcha` | Krok 8: Świąteczna CAPTCHA | `src/steps/Step08Captcha.vue` | `.agents/skills/step-08-captcha/SKILL.md` | Zaimplementowany (Issue #7) |
+| 9 | `step-09-terms` | Krok 9: Regulamin Mikołaja | `src/steps/Step09Terms.vue` | `.agents/skills/step-09-terms/SKILL.md` | Zaimplementowany (Issue #8) |
+| 10 | `step-10-grinch` | Krok 10: Próba Grincha | `src/steps/Step10GrinchCheck.vue` | `.agents/skills/step-10-grinch/SKILL.md` | Zaimplementowany (Issue #9) |
+| 11 | `step-11-certificate` | Krok 11: Świąteczny Certyfikat | `src/steps/Step11Certificate.vue` | `.agents/skills/step-11-certificate/SKILL.md` | Zaimplementowany (Issue #10) |
 
 ---
 
@@ -87,10 +92,15 @@
 | `step-00-home` | `.agents/skills/step-00-home/SKILL.md` | Strona główna z przyciskami Logowanie (okno dialogowe) i Rejestracja (Issue #2) |
 | `step-01-credentials` | `.agents/skills/step-01-credentials/SKILL.md` | Krok 1: jednoręki bandyta dla username + hasło wspak z efektem świeczki na kursorze |
 | `step-02-email` | `.agents/skills/step-02-email/SKILL.md` | Krok 2: e-mail z 9 absurdalnymi regułami (50+ znaków, 狗, suma cyfr 14, emotka, renifer, XXIV, brak małego e, TLD) |
-| `step-03-interests` | `.agents/skills/step-03-interests/SKILL.md` | Krok 3: 30 checkboxów w 3 kolumnach z ukrytą pułapką „Wyczyść wszystko” |
+| `step-03-interests` | `.agents/skills/step-03-interests/SKILL.md` | Krok 3: 21 checkboxów w 3 kolumnach z ukrytą pułapką „Wyczyść wszystko” |
 | `step-04-memory` | `.agents/skills/step-04-memory/SKILL.md` | Krok 4: świąteczna gra Memory (4 pary kart) |
 | `step-05-birthdate` | `.agents/skills/step-05-birthdate/SKILL.md` | Krok 5: data urodzenia — katapulta sań dla roku + tasujące się przyciski +1/-1 dla miesiąca i dnia |
-| `step-06-placeholder` | `.agents/skills/step-06-placeholder/SKILL.md` | Tymczasowy pusty widok Kroku 6 rejestracji |
+| `step-06-phone` | `.agents/skills/step-06-phone/SKILL.md` | Krok 6: 9-cyfrowy numer telefonu wybierany na retro tarczy obrotowej |
+| `step-07-country` | `.agents/skills/step-07-country/SKILL.md` | Krok 7: kraj zamieszkania wg odległości od Bieguna Północnego + reklama dla Polski + `ThanosSkipModal` |
+| `step-08-captcha` | `.agents/skills/step-08-captcha/SKILL.md` | Krok 8: świąteczna CAPTCHA „Karp bez ości” ze zmieniającymi się kafelkami |
+| `step-09-terms` | `.agents/skills/step-09-terms/SKILL.md` | Krok 9: regulamin RODO Bieguna Północnego z detekcją prędkości scrolla + `ParabolicCheckbox` |
+| `step-10-grinch` | `.agents/skills/step-10-grinch/SKILL.md` | Krok 10: przytrzymanie przycisku przez 5s mimo trzęsienia okna i błędów Grincha |
+| `step-11-certificate` | `.agents/skills/step-11-certificate/SKILL.md` | Krok 11 (ostatni): Świąteczny Certyfikat z `store.formData` + `SantaErrorModal` resetujący rejestrację |
 | `control-volume-bauble-game` | `.agents/skills/control-volume-bauble-game/SKILL.md` | Głośna muzyka „Last Christmas” na starcie oraz 10s mini-gra z 20 bombkami wyciszającymi dźwięk |
 
 ---
@@ -102,6 +112,11 @@
 - `src/components/ui/KitschModal.vue` — reużywalne okno dialogowe oparte na `KitschCard`.
 - `src/components/ui/SlotMachineUsername.vue` — retro skrzynka jednorękiego bandyty z mechaniczną dźwignią i pojedynczym okienkiem bębna losującym 1 `username`.
 - `src/components/ui/SleighCatapult.vue` — katapulta sań ładująca siłę rzutu (0–100% ping-pong) do wyboru roku urodzenia.
+- `src/components/ui/RotaryPhoneDial.vue` — retro tarcza obrotowa telefonu do wybierania cyfr z animacją powrotu.
+- `src/components/ui/ThanosSkipModal.vue` — modal VIP skipu z 3 ofertami rozpadającymi się w stylu rękawicy Thanosa i 4. ofertą specjalną.
+- `src/components/ui/ParabolicCheckbox.vue` — mikroskopijny checkbox uciekający po paraboli i toczący się po wylądowaniu.
+- `src/components/ui/HoldToConfirmButton.vue` — przycisk wymagający przytrzymania przez zadany czas z paskiem postępu.
+- `src/components/ui/SantaErrorModal.vue` — niezamykalny modal błędu serwera z twarzą Mikołaja (SVG), dymkiem „Hoł Hoł Hoł...” i przyciskiem resetu.
 - `src/components/ui/ChristmasLights.vue` — pasek migających lampek choinkowych.
 - `src/components/ui/SnowfallOverlay.vue` — warstwa animowanego, padającego śniegu.
 - `src/components/ui/VolumeBaubleGameModal.vue` — okno dialogowe z choinką i 20 losowymi bombkami (1–5%) na 10s do wyciszania muzyki.
@@ -109,6 +124,7 @@
 - `src/utils/emailValidation.ts` — zestaw 9 absurdalnych reguł walidacji adresu e-mail dla Kroku 2.
 - `src/utils/memoryGame.ts` — generator przetasowanej talii kart dla gry Memory w Kroku 4.
 - `src/utils/birthdateCatapult.ts` — logika mapowania siły katapulty na rok oraz obsługa dni w miesiącu i lat przestępnych dla Kroku 5.
+- `src/utils/captchaGame.ts` — generator i okresowa podmiana kafelków dla Kroku 8 („Karp bez ości”).
 - `src/components/layout/ControlPanel.vue` — panel kontrolny (przełączniki muzyki/śniegu/lampek/ramki, combobox `Tryb dev: OFF/ON` + pasek szybkiego skakania między krokami w trybie deweloperskim).
 - `src/components/layout/StageContainer.vue` — duży, kwadratowy główny kontener ładujący aktywny krok formularza.
 
@@ -116,6 +132,7 @@
 
 ## 7. Historia zmian
 
+- **2026-11-25 (Issues #4–#10 — Aktualizacja Kroku 3 oraz Kroki 6–11)**: Zredukowano listę zainteresowań w `Step03Interests` do 21 opcji (Issue #4) oraz zaimplementowano komplet pozostałych kroków: `Step06Phone` z `RotaryPhoneDial` (Issue #5), `Step07Country` z `ThanosSkipModal` (Issue #6), `Step08Captcha` z `captchaGame.ts` (Issue #7), `Step09Terms` z `ParabolicCheckbox` (Issue #8), `Step10GrinchCheck` z `HoldToConfirmButton` (Issue #9) i finałowy `Step11Certificate` z `SantaErrorModal` resetującym rejestrację (Issue #10).
 - **2026-11-25 (Issue #3 — Krok 5: Data urodzenia)**: Zaimplementowano `Step05Birthdate.vue`, reużywalny komponent `SleighCatapult.vue` oraz `birthdateCatapult.ts` (katapulta sań dla roku 1900–2026 + przyciski `+1`/`-1` dla miesiąca i dnia zamieniające się miejscami co 3 kliknięcia, zapis w `store.formData`) oraz tymczasowy `Step06Placeholder.vue`.
 - **2026-11-25 (Retro kiczowaty redesign UI)**: Przebudowano wygląd na prostszy, mniej nowoczesny styl lat 90./2000. (`src/style.css`, `KitschButton.vue`, `KitschCard.vue`, `KitschModal.vue`, `ControlPanel.vue`, `StageContainer.vue`) — kanciaste ramki 3D `outset`/`double`, jaskrawe kolory świąteczne, kropkowane tło, brak rozmycia `backdrop-blur` oraz przewijany pasek `marquee` u góry strony.
 - **2026-11-24 (Krok 4: Świąteczne Memory)**: Zaimplementowano `Step04Memory.vue` oraz `memoryGame.ts` (4 pary świątecznych symboli; nietrafione karty zakrywają się ponownie bez resetowania dopasowanych par + po 5s dialog z fałszywą opcją wykupienia skipu 1/2/3 kroków za $2/$3/$5) oraz tymczasowy `Step05Placeholder.vue`.

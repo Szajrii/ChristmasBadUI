@@ -10,7 +10,7 @@ describe('Step03Interests.vue', () => {
     setActivePinia(createPinia())
   })
 
-  it('renders 30 checkboxes, resets all when trap is clicked, and completes when all 29 non-trap items are selected', async () => {
+  it('renders 21 checkboxes, resets all when trap is clicked, and completes when all 20 non-trap items are selected', async () => {
     const store = useRegistrationStore()
     store.completeStep('home')
     store.completeStep('step-01-credentials')
@@ -18,7 +18,7 @@ describe('Step03Interests.vue', () => {
     store.goToStep(3)
 
     const wrapper = mount(Step03Interests)
-    expect(INTEREST_OPTIONS.length).toBe(30)
+    expect(INTEREST_OPTIONS.length).toBe(21)
 
     // Submit with nothing selected -> error message
     await wrapper.find('form').trigger('submit')
@@ -27,12 +27,12 @@ describe('Step03Interests.vue', () => {
     // Select a few interests, then click the "Wyczyść wszystko" trap
     await wrapper.find('[data-testid="interest-checkbox-int-01"]').trigger('change')
     await wrapper.find('[data-testid="interest-checkbox-int-02"]').trigger('change')
-    await wrapper.find('[data-testid="interest-checkbox-int-27"]').trigger('change')
+    await wrapper.find('[data-testid="interest-checkbox-int-19"]').trigger('change')
 
     expect(wrapper.find('[data-testid="interests-error"]').text()).toContain('Wyczyść wszystko')
     expect((wrapper.find('[data-testid="interest-checkbox-int-01"]').element as HTMLInputElement).checked).toBe(false)
 
-    // Select all 29 non-trap options
+    // Select all 20 non-trap options
     for (const opt of INTEREST_OPTIONS) {
       if (!opt.isResetTrap) {
         await wrapper.find(`[data-testid="interest-checkbox-${opt.id}"]`).trigger('change')
@@ -42,7 +42,7 @@ describe('Step03Interests.vue', () => {
     await wrapper.find('form').trigger('submit')
 
     expect(store.completedStepIds).toContain('step-03-interests')
-    expect((store.formData.interests as string[]).length).toBe(29)
+    expect((store.formData.interests as string[]).length).toBe(20)
     expect(store.currentStepIndex).toBe(4)
   })
 

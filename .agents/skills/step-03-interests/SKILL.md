@@ -1,6 +1,6 @@
 ---
 name: step-03-interests
-description: Specyfikacja Kroku 3 rejestracji (Step03Interests) — 30 checkboxów z zainteresowaniami w 3 kolumnach oraz pułapką „Wyczyść wszystko”.
+description: Specyfikacja Kroku 3 rejestracji (Step03Interests) — 21 checkboxów z zainteresowaniami (7 wierszy × 3 kolumny) oraz pułapką „Wyczyść wszystko”.
 ---
 
 # Skill: Krok 03 — Wybór Zainteresowań (`Step03Interests`)
@@ -11,11 +11,11 @@ description: Specyfikacja Kroku 3 rejestracji (Step03Interests) — 30 checkbox�
 - **Komponent**: `src/steps/Step03Interests.vue`
 
 ## Opis działania i UI
-- Wyświetla **30 checkboxów** ułożonych w responsywnej siatce 2–3 kolumn (`grid-cols-2 sm:grid-cols-3`).
-- Jeden z checkboxów pod koniec listy (`int-27`) nazywa się **„Wyczyść wszystko”** (`isResetTrap: true`) i wygląda identycznie jak pozostałe opcje.
+- Wyświetla **21 checkboxów** ułożonych w responsywnej siatce 2–3 kolumn (`grid-cols-2 sm:grid-cols-3`, na desktopie 7 wierszy × 3 kolumny).
+- Jeden z checkboxów pod koniec listy (`int-19`) nazywa się **„Wyczyść wszystko”** (`isResetTrap: true`) i wygląda identycznie jak pozostałe opcje.
 - Kliknięcie **„Wyczyść wszystko”** natychmiast kasuje wszystkie zaznaczone checkboxy (łącznie z samym sobą).
-- Przy próbie przejścia dalej bez zaznaczenia wszystkich 29 właściwych zainteresowań pojawia się komunikat, że trzeba wybrać **każde** zainteresowanie.
-- Aby przejść dalej, należy zaznaczyć wszystkie 29 zainteresowań **z pominięciem** pułapki „Wyczyść wszystko” (lub użyć `devMode`).
+- Przy próbie przejścia dalej bez zaznaczenia wszystkich 20 właściwych zainteresowań pojawia się komunikat, że trzeba wybrać **każde** zainteresowanie.
+- Aby przejść dalej, należy zaznaczyć wszystkie 20 zainteresowań **z pominięciem** pułapki „Wyczyść wszystko” (lub użyć `devMode`).
 
 ## Testy jednostkowe
-- `src/__tests__/Step03Interests.spec.ts` — testuje błąd przy niepełnym zaznaczeniu, działanie pułapki „Wyczyść wszystko”, zaliczenie kroku po zaznaczeniu 29 właściwych opcji oraz obejście w `devMode`.
+- `src/__tests__/Step03Interests.spec.ts` — testuje błąd przy niepełnym zaznaczeniu, działanie pułapki „Wyczyść wszystko”, zaliczenie kroku po zaznaczeniu 20 właściwych opcji oraz obejście w `devMode`.
