@@ -11,11 +11,11 @@ withDefaults(
 
 <template>
   <div
-    class="rounded-3xl p-2 shadow-[0_14px_40px_rgba(0,0,0,0.65)]"
-    :class="stripedBorder ? 'candy-cane-border' : 'bg-yellow-400'"
+    class="p-2.5 shadow-[8px_8px_0_#000000]"
+    :class="stripedBorder ? 'candy-cane-border' : 'bg-[#ffff00]'"
   >
     <div
-      class="h-full w-full rounded-[20px] border-4 border-yellow-300/90 bg-gradient-to-br from-red-950/95 via-emerald-950/95 to-red-900/95 text-amber-50"
+      class="h-full w-full border-4 border-double border-[#ffff00] bg-[#7a0000] text-[#ffffff]"
     >
       <slot />
     </div>

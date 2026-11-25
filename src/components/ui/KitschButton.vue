@@ -17,12 +17,10 @@ const props = withDefaults(
 )
 
 const variantClasses: Record<KitschButtonVariant, string> = {
-  santa:
-    'bg-gradient-to-b from-red-500 via-red-600 to-red-800 text-yellow-200 border-yellow-300 hover:from-red-400 hover:to-red-700',
-  elf: 'bg-gradient-to-b from-emerald-500 via-green-600 to-green-900 text-yellow-100 border-lime-300 hover:from-emerald-400 hover:to-green-800',
-  gold: 'bg-gradient-to-b from-yellow-300 via-amber-400 to-yellow-600 text-red-950 border-white hover:from-yellow-200 hover:to-amber-500',
-  grinch:
-    'bg-gradient-to-b from-lime-400 via-lime-600 to-emerald-900 text-red-950 border-red-500 hover:from-lime-300 hover:to-lime-700',
+  santa: 'bg-[#cc0000] text-[#ffff00] border-[#ff6666] hover:bg-[#ee0000]',
+  elf: 'bg-[#007700] text-[#ffffff] border-[#55ff55] hover:bg-[#009900]',
+  gold: 'bg-[#ffcc00] text-[#990000] border-[#ffff88] hover:bg-[#ffdd33]',
+  grinch: 'bg-[#66cc00] text-[#000000] border-[#ccff66] hover:bg-[#77dd00]',
 }
 </script>
 
@@ -30,10 +28,10 @@ const variantClasses: Record<KitschButtonVariant, string> = {
   <button
     :type="props.type"
     :disabled="props.disabled"
-    class="inline-flex items-center justify-center gap-1.5 rounded-xl border-2 px-3.5 py-2 text-sm font-bold tracking-wide shadow-[0_4px_0_rgba(0,0,0,0.45)] transition-transform duration-100 active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
+    class="retro-bevel inline-flex cursor-pointer items-center justify-center gap-1.5 px-3 py-1.5 text-sm font-bold tracking-wide disabled:cursor-not-allowed disabled:opacity-50"
     :class="[
       variantClasses[props.variant],
-      props.active ? 'ring-2 ring-yellow-300 ring-offset-2 ring-offset-red-950' : '',
+      props.active ? 'outline-2 outline-dashed outline-[#ffff00]' : '',
     ]"
   >
     <slot />

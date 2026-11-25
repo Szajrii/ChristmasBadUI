@@ -10,7 +10,7 @@ Ten skill opisuje ogólne zasady budowy projektu **ChristmasBadUI**. Poszczegól
 ## 1. Wizja i styl (Bad Christmas UI)
 
 - **Cel**: Wieloetapowy (kilkanaście+ okien) świąteczny formularz rejestracyjny, w którym przejście do kolejnego kroku wymaga poprawnego ukończenia poprzedniego.
-- **Estetyka**: Maksymalny świąteczny kicz — jaskrawe czerwienie i zielenie, złote obramowania, paski jak laska cukrowa (candy cane), migające lampki, padający śnieg, Mikołaj, choinki, krzykliwe fonty, przesadne cienie i animacje.
+- **Estetyka**: Maksymalny świąteczny kicz w stylu stron z przełomu lat 90./2000. (GeoCities / Windows 98) — proste, kanciaste okna z wypukłymi ramkami 3D (`retro-bevel`, `border-double`), krzykliwe podstawowe kolory (`#ff0000`, `#008000`, `#ffff00`, `#00ff00`), paski jak laska cukrowa, migające lampki, padający śnieg, przesuwający się pasek `marquee`, `Comic Sans MS` — bez nowoczesnego glassmorphizmu i zaokrągleń.
 - **UX**: Celowo utrudniony, skomplikowany i wkurzający (np. uciekające przyciski, suwaki zamiast inputów, losowo przestawiające się litery, świąteczne zagadki, przeszkadzający Mikołaj), **ale zawsze możliwy do przejścia i deterministycznie testowalny**.
 
 ## 2. Stack technologiczny i menedżer pakietów

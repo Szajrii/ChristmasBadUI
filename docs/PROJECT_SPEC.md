@@ -112,6 +112,7 @@
 
 ## 7. Historia zmian
 
+- **2026-11-25 (Retro kiczowaty redesign UI)**: Przebudowano wygląd na prostszy, mniej nowoczesny styl lat 90./2000. (`src/style.css`, `KitschButton.vue`, `KitschCard.vue`, `KitschModal.vue`, `ControlPanel.vue`, `StageContainer.vue`) — kanciaste ramki 3D `outset`/`double`, jaskrawe kolory świąteczne, kropkowane tło, brak rozmycia `backdrop-blur` oraz przewijany pasek `marquee` u góry strony.
 - **2026-11-24 (Krok 4: Świąteczne Memory)**: Zaimplementowano `Step04Memory.vue` oraz `memoryGame.ts` (4 pary świątecznych symboli; nietrafione karty zakrywają się ponownie bez resetowania dopasowanych par + po 5s dialog z fałszywą opcją wykupienia skipu 1/2/3 kroków za $2/$3/$5) oraz tymczasowy `Step05Placeholder.vue`.
 
 - **2026-11-24 (Powiększenie głównego kontenera)**: Zwiększono rozmiar głównego kwadratu w `StageContainer.vue` (`max-w-[780px]`) oraz wysokość listy w `Step03Interests.vue`, aby mieściło się więcej treści bez ciasnego scrollowania.

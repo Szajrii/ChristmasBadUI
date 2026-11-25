@@ -20,21 +20,28 @@ function onDevStepChange(event: Event) {
 <template>
   <header
     data-testid="control-panel"
-    class="relative z-20 w-full border-b-4 border-yellow-400 bg-gradient-to-r from-red-900 via-emerald-900 to-red-900 shadow-[0_6px_24px_rgba(0,0,0,0.6)]"
+    class="relative z-20 w-full border-b-4 border-[#ffff00] bg-[#990000] shadow-[0_6px_0_#000000]"
   >
+    <!-- Klasyczny przesuwający się pasek świąteczny z lat 2000 -->
+    <div class="overflow-hidden border-b-2 border-[#ffff00] bg-[#004400] py-0.5 text-xs font-bold text-[#ffff00]">
+      <span class="animate-retro-marquee">
+        🎅 WITAJ W ŚWIĄTECZNEJ REJESTRACJI 2000™ 🎄 HO! HO! HO! 🎁 MIKOŁAJ PATRZY! 🦌 WESOŁYCH ŚWIĄT! ❄️
+      </span>
+    </div>
+
     <ChristmasLights :enabled="store.settings.lightsEnabled" :count="18" />
 
     <div
-      class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3"
+      class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-2.5"
     >
       <!-- Branding -->
       <div class="flex items-center gap-2.5">
         <span class="text-3xl" aria-hidden="true">🎅</span>
         <div>
-          <h1 class="kitsch-text-shadow text-lg font-extrabold tracking-wide text-yellow-300 sm:text-xl">
+          <h1 class="kitsch-text-shadow text-lg font-extrabold tracking-wide text-[#ffff00] sm:text-xl">
             ChristmasBadUI™
           </h1>
-          <p class="text-xs text-emerald-200">
+          <p class="text-xs font-bold text-[#00ff00]">
             Panel Kontrolny Bieguna Północnego • Krok {{ store.currentStepIndex + 1 }} / {{ store.totalSteps }}
           </p>
         </div>
@@ -80,17 +87,17 @@ function onDevStepChange(event: Event) {
         </KitschButton>
 
         <!-- Combobox Tryb Deweloperski -->
-        <label class="inline-flex items-center gap-1.5 rounded-xl border-2 border-yellow-300 bg-black/45 px-2.5 py-1.5 text-xs font-bold text-yellow-200">
+        <label class="retro-bevel inline-flex items-center gap-1.5 border-[#ffff00] bg-[#003300] px-2.5 py-1 text-xs font-bold text-[#ffff00]">
           <span aria-hidden="true">🛠️</span>
           <select
             data-testid="dev-mode-select"
             aria-label="Tryb deweloperski"
             :value="store.devMode ? 'on' : 'off'"
-            class="cursor-pointer bg-transparent text-xs font-bold text-yellow-200 outline-none"
+            class="cursor-pointer bg-[#003300] text-xs font-bold text-[#ffff00] outline-none"
             @change="onDevModeChange"
           >
-            <option value="off" class="bg-red-950 text-yellow-100">Tryb dev: OFF</option>
-            <option value="on" class="bg-emerald-950 text-lime-200">Tryb dev: ON</option>
+            <option value="off" class="bg-[#660000] text-[#ffff00]">Tryb dev: OFF</option>
+            <option value="on" class="bg-[#006600] text-[#00ff00]">Tryb dev: ON</option>
           </select>
         </label>
       </nav>
